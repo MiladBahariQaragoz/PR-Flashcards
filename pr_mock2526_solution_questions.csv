@@ -81,19 +81,26 @@ Basic explanation (HS level): Everyone with zero characteristics has z = -2 (bia
 Basic explanation (HS level): Solving the boundary equation directly gives this line equation.","Explanation: **Correct** - With bias=0 and Age=0, Exposure=0: z = 0 + 0 + 0 = 0 (boundary condition).
 
 Basic explanation (HS level): Removing the bias term means z=0 when both features are zero.",
-3.1,MCQ,A prototype scanner is evaluated on a test set of [[MATH]]N = 100[[/MATH]] bags. The following confusion matrix summarizes the initial results: reference\hypothesis + − + − Which statements are correct based on this audit?,,[[MATH]]FPR = 15[[/MATH]],[[MATH]]ACC = 75[[/MATH]],TPR equals Recall and here [[MATH]]TPR = 40[[/MATH]],The negative predictive value is [[MATH]]NPV = 35[[/MATH]],The F1-score can be computed as [[MATH]]F1 = 80[[/MATH]],"Since the dataset is balanced (50 positives, 50 negatives), ACC must equal TPR",,"B, C, E","Explanation: **Incorrect** - [[MATH]]FPR = FP/(FP+TN) = 15/(15+35) = 15/50 = 0.30[[/MATH]], not [[MATH]]15[[/MATH]]. (A confuses rate with count.)
+3.1,MCQ,"A prototype scanner is evaluated on a test set of [[MATH]]N = 100[[/MATH]] bags. The confusion matrix:
 
-Basic explanation (HS level): FPR should be a rate (proportion), not a count. 15 is the count, 0.3 is the rate.","Explanation: **Correct** - ACC = (TP+TN)/N = (40+35)/100 = 75/100 = 0.75 = 75%.
+reference \ hypothesis | +  | −  | Total
+                      + | 40 | 10 | 50
+                      − | 15 | 35 | 50
+                  Total | 55 | 45 | 100
 
-Basic explanation (HS level): Accuracy is the proportion of correct predictions overall.","Explanation: **Correct** - TPR = TP/(TP+FN) = 40/50 = 0.80 = 80%. TPR equals Recall. The calculation matches.
+Which statements are correct?",,"[[MATH]]FPR = \frac{15}{55}[[/MATH]]","[[MATH]]ACC = \frac{75}{100}[[/MATH]]","TPR equals Recall and here [[MATH]]TPR = \frac{40}{50}[[/MATH]]","The negative predictive value is [[MATH]]NPV = \frac{35}{50}[[/MATH]]","The F1-score can be computed as [[MATH]]F1 = \frac{80}{105}[[/MATH]]","Since the dataset is balanced (50 positives, 50 negatives), ACC must equal TPR",,"B, C, E","Explanation: **Incorrect** - [[MATH]]FPR = FP/(FP+TN) = 15/(15+35) = \frac{15}{50} = 0.30[[/MATH]], not [[MATH]]15[[/MATH]]. The correct fraction is [[MATH]]\frac{15}{55}[[/MATH]].
 
-Basic explanation (HS level): True positive rate measures what fraction of actual positives we caught.","Explanation: **Incorrect** - NPV = TN/(TN+FN) = 35/(35+10) = 35/45 ≠ 35/50. (Wrong denominator.)
+Basic explanation (HS level): FPR should be a rate (proportion) with denominator (FP+TN)=55, not a count. 15 is the false positive count, and 55 is all actual negatives.","Explanation: **Correct** - ACC = (TP+TN)/N = (40+35)/100 = [[MATH]]\frac{75}{100}[[/MATH]] = 0.75.
 
-Basic explanation (HS level): NPV denominator includes negatives we correctly identified and negatives we missed.","Explanation: **Correct** - F1 = 2·Precision·Recall/(Precision+Recall) = 2·(40/55)·(40/50)/((40/55)+(40/50)) = 80/105.
+Basic explanation (HS level): Accuracy is the proportion of correct predictions overall (diagonal of confusion matrix divided by total).","Explanation: **Correct** - TPR = TP/(TP+FN) = 40/50 = [[MATH]]\frac{40}{50}[[/MATH]] = 0.80 = 80%. TPR equals Recall. The calculation matches.
 
-Basic explanation (HS level): F1-score is the harmonic mean of precision and recall.","Explanation: **Incorrect** - ACC ≠ TPR always. With balanced data, ACC = (TP+TN)/N while TPR = TP/(TP+FN). These are different.
+Basic explanation (HS level): True positive rate measures what fraction of actual positives we caught (TP row denominator).","Explanation: **Incorrect** - NPV = TN/(TN+FN) = 35/(35+10) = 35/45 ≠ [[MATH]]\frac{35}{50}[[/MATH]]. (Wrong denominator - should sum column, not mix rows.)
 
-Basic explanation (HS level): Even with balanced classes, accuracy and TPR measure different things."
+Basic explanation (HS level): NPV denominator includes negatives we correctly identified (TN) and negatives we missed (FN). TN+FN = 35+10 = 45.","Explanation: **Correct** - Precision = TP/(TP+FP) = 40/55. Recall/TPR = 40/50. F1 = 2·Precision·Recall/(Precision+Recall) = [[MATH]]2·\frac{40}{55}·\frac{40}{50}/(\frac{40}{55}+\frac{40}{50}) = \frac{80}{105}[[/MATH]].
+
+Basic explanation (HS level): F1-score is the harmonic mean of precision and recall, combining both metrics.","Explanation: **Incorrect** - ACC ≠ TPR always. With balanced data, ACC = (TP+TN)/N = 75/100 while TPR = TP/(TP+FN) = 40/50 = 80/100. These are different.
+
+Basic explanation (HS level): Even with balanced classes, accuracy considers both TP and TN, while TPR only considers TP."
 3.2,MCQ,"To communicate with the security staff, you must clarify the meaning of different metrics. Which of the following statements about metric relationships are true?",,The F-measure is the geometric mean of Recall and Precision.,The false positive rate (FPR) is the proportion of misclassified samples among all bags flagged by the system.,The true positive rate (TPR) is numerically equal to Recall and Sensitivity.,"If the scanner flags every single bag as a threat, then its Specificity equals 1.",The denominator of the negative predictive value (NPV) contains true negatives (TN) and false negatives (FN).,Specificity equals 1 −FPR.,,"C, E, F","Explanation: **Incorrect** - F-measure is the harmonic mean (not geometric mean) of Recall and Precision: F1 = 2·PR·Rec/(PR+Rec).
 
 Basic explanation (HS level): Harmonic mean vs geometric mean - the formula uses addition, not multiplication.","Explanation: **Incorrect** - FPR is the false positive rate among actual negatives: FPR = FP/(FP+TN). It's NOT about misclassification among flagged items.
