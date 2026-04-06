@@ -20,6 +20,21 @@ Simple no-database flashcard web app for Vercel.
 2. Import the repository into Vercel.
 3. Leave the project as a static site. No database or backend is required.
 
+## Vercel Analytics
+
+This repository now includes Vercel Analytics for static deployment via:
+
+- [index.html](index.html): loads `/_vercel/insights/script.js`
+- [package.json](package.json): includes `@vercel/analytics`
+
+If you later migrate this app to Next.js (React), use:
+
+```tsx
+import { Analytics } from "@vercel/analytics/next";
+```
+
+Then render `<Analytics />` in your root layout.
+
 ## Local preview
 
 If you want to preview locally, use any static file server from this folder so both CSV files can be fetched correctly.

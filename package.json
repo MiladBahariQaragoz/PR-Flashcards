@@ -1,0 +1,24 @@
+{
+  "name": "flashcard",
+  "version": "1.0.0",
+  "description": "Simple no-database flashcard web app for Vercel.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiladBahariQaragoz/PR-Flashcards.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MiladBahariQaragoz/PR-Flashcards/issues"
+  },
+  "homepage": "https://github.com/MiladBahariQaragoz/PR-Flashcards#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
