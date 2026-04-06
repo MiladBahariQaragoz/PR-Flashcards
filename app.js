@@ -8,6 +8,7 @@ const elements = {
   progressFill: document.getElementById("progressFill"),
   contextFilter: document.getElementById("contextFilter"),
   searchInput: document.getElementById("searchInput"),
+  reviewOnlyToggle: document.getElementById("reviewOnlyToggle"),
   previousButton: document.getElementById("previousButton"),
   shuffleButton: document.getElementById("shuffleButton"),
   resetButton: document.getElementById("resetButton"),
@@ -39,6 +40,7 @@ const state = {
   currentCardId: null,
   currentFilter: "all",
   searchQuery: "",
+  showReviewOnly: false,
   isFlipped: false,
 };
 
@@ -345,6 +347,7 @@ function filteredCards() {
 
   return state.cards.filter((card) => {
     const matchesContext = state.currentFilter === "all" || card.Context === state.currentFilter;
+    const matchesReviewOnly = !state.showReviewOnly || state.progress.cardState[card.id]?.status === "review";
     const searchableOptions = card.options.map((option) => `${option.letter} ${option.text}`).join(" ");
     const matchesSearch =
       !search ||
@@ -355,7 +358,7 @@ function filteredCards() {
       normalizeText(card.questionType).includes(search) ||
       normalizeText(searchableOptions).includes(search);
 
-    return matchesContext && matchesSearch;
+    return matchesContext && matchesReviewOnly && matchesSearch;
   });
 }
 
@@ -394,7 +397,12 @@ function goNext() {
     return;
   }
 
-  const currentIndex = Math.max(0, cards.findIndex((card) => card.id === state.currentCardId));
+  const currentIndex = cards.findIndex((card) => card.id === state.currentCardId);
+  if (currentIndex < 0) {
+    goToCard(cards[0]);
+    return;
+  }
+
   const nextCard = cards[(currentIndex + 1) % cards.length];
   goToCard(nextCard);
 }
@@ -405,7 +413,12 @@ function goPrevious() {
     return;
   }
 
-  const currentIndex = Math.max(0, cards.findIndex((card) => card.id === state.currentCardId));
+  const currentIndex = cards.findIndex((card) => card.id === state.currentCardId);
+  if (currentIndex < 0) {
+    goToCard(cards[0]);
+    return;
+  }
+
   const previousIndex = (currentIndex - 1 + cards.length) % cards.length;
   goToCard(cards[previousIndex]);
 }
@@ -672,6 +685,10 @@ function bindEvents() {
   });
   elements.searchInput.addEventListener("input", (event) => {
     state.searchQuery = event.target.value;
+    render();
+  });
+  elements.reviewOnlyToggle.addEventListener("change", (event) => {
+    state.showReviewOnly = event.target.checked;
     render();
   });
   elements.nameForm.addEventListener("submit", (event) => {
