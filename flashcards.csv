@@ -20,7 +20,7 @@
 "Prior Probability P(y)","**answer:** The baseline probability of a class occurring known before analyzing any specific features or data points.
 
 **basic explanation:** This is your starting belief about class frequency before seeing the current input.","EX 1"
-"Class-Conditional Probability P(x|y)","**answer:** The distribution of feature vectors within a specific class calculated as the product of individual feature probabilities under the statistical independence assumption: [[MATH]]P(x|y) = prod P(x_i|y)[[/MATH]].
+"Class-Conditional Probability P(x|y)","**answer:** The distribution of feature vectors within a specific class calculated as the product of individual feature probabilities under the statistical independence assumption: [[MATH]]P(x|y) = prod_i P(x_i|y)[[/MATH]].
 
 **basic explanation:** This measures how likely those features are if we already know the class, often by multiplying per-feature probabilities.","EX 1"
 "Bayesian Decision Rule","**answer:** Assign an instance to the class with the highest posterior probability: [[MATH]]y_hat = argmax_y [ P(y) * P(x|y) ][[/MATH]].
@@ -29,7 +29,7 @@
 "Unnormalized Posteriors","**answer:** In Bayesian classification posteriors do not need to sum to 1 to make a valid decision — only the relative maximum matters.
 
 **basic explanation:** For choosing the best class, exact normalization is unnecessary because only the largest value matters.","EX 1"
-"Posterior Probability Modeling","**answer:** Posteriors can be modeled as F(x) passed through the logistic (sigmoid) function. If F(x) > 0 the predicted class approaches 0; if F(x) <= 0 the class approaches 1.
+"Posterior Probability Modeling","**answer:** Posteriors can be modeled as F(x) passed through the logistic (sigmoid) function. For [[MATH]]p(y=1|x)=\sigma(F(x))[[/MATH]], if [[MATH]]F(x) > 0[[/MATH]] then [[MATH]]p(y=1|x) > 0.5[[/MATH]], if [[MATH]]F(x) < 0[[/MATH]] then [[MATH]]p(y=1|x) < 0.5[[/MATH]], and at [[MATH]]F(x)=0[[/MATH]] the probability is [[MATH]]0.5[[/MATH]].
 
 **basic explanation:** A scoring function is passed through a sigmoid to convert it into a class probability between 0 and 1.","EX 2"
 "Gaussian Decision Boundaries — General Case","**answer:** For Gaussian class-conditional densities the decision boundary is a quadratic polynomial (circles ovals parabolas or hyperbolas).
@@ -95,7 +95,7 @@
 "SVR Sparsity","**answer:** Most points fall inside the epsilon-tube and have zero Lagrange multiplier difference resulting in a sparse solution where only boundary or outside points define the regression.
 
 **basic explanation:** Since many points lie inside the epsilon tube, only a subset matters, giving a sparse model.","EX 5"
-"Parameter Estimation — ML","**answer:** Maximum Likelihood: optimizes log-likelihood of observations assuming statistical independence: [[MATH]]theta_ML = argmax_theta sum_i log P(x_i | theta)[[/MATH]].
+"Parameter Estimation — ML","**answer:** Maximum Likelihood: optimizes log-likelihood of observations assuming statistical independence: [[MATH]]theta_ML = argmax_theta [ sum_i log P(x_i | theta) ][[/MATH]].
 
 **basic explanation:** ML chooses parameters that make the observed data most probable under the model.","EX 6"
 "Parameter Estimation — MAP","**answer:** Maximum a Posteriori: incorporates a prior PDF over parameters: [[MATH]]theta_MAP = argmax_theta [ sum_i log P(x_i | theta) + log P(theta) ][[/MATH]].
@@ -104,7 +104,7 @@
 "Parameter Estimation — EM Algorithm","**answer:** Used for high-dimensional spaces or latent/incomplete data. Iterates between E-step (compute probabilities and log-likelihood) and M-step (update parameters) until convergence.
 
 **basic explanation:** EM alternates between estimating hidden assignments and updating parameters until changes become small.","EX 6"
-"Gaussian Mixture Model (GMM)","**answer:** Represents a set of observations as a weighted combination of K multivariate Gaussian distributions: [[MATH]]P(x) = sum_{k=1}^{K} p_k * N(x | mu_k Sigma_k)[[/MATH]].
+"Gaussian Mixture Model (GMM)","**answer:** Represents a set of observations as a weighted combination of K multivariate Gaussian distributions: [[MATH]]P(x) = sum_{k=1}^{K} p_k * N(x | mu_k, Sigma_k)[[/MATH]].
 
 **basic explanation:** A GMM models data as several Gaussian clusters, each with its own center, spread, and weight.","EX 6"
 "GMM Complexity Drivers","**answer:** Model complexity is driven by: number of Gaussians K and dimensionality of feature vectors d and total number of feature vectors N.
@@ -134,7 +134,7 @@
 "Kernel PCA — Key Idea","**answer:** Features are virtually mapped into a higher-dimensional space where they become linearly separable without explicitly computing the mapping.
 
 **basic explanation:** Kernel PCA separates nonlinear patterns by implicitly mapping data into a higher-dimensional feature space.","EX 7"
-"Kernel Trick","**answer:** Inner products x_i^T x_j are replaced by a positive semidefinite kernel function k(x_i x_j) enabling computation in high-dimensional space implicitly.
+"Kernel Trick","**answer:** Inner products [[MATH]]x_i^T x_j[[/MATH]] are replaced by a positive semidefinite kernel function [[MATH]]k(x_i, x_j)[[/MATH]] enabling computation in high-dimensional space implicitly.
 
 **basic explanation:** Use a kernel function to compute high-dimensional dot products without explicitly building high-dimensional vectors.","EX 7"
 "Naive Bayes — Mutual Independence Assumption","**answer:** All dimensions of the feature vector are assumed completely mutually independent: [[MATH]]P(x|y) = prod_d P(x_d|y)[[/MATH]].
