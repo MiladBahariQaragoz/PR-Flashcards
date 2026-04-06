@@ -20,10 +20,10 @@
 "Prior Probability P(y)","**answer:** The baseline probability of a class occurring known before analyzing any specific features or data points.
 
 **basic explanation:** This is your starting belief about class frequency before seeing the current input.","EX 1"
-"Class-Conditional Probability P(x|y)","**answer:** The distribution of feature vectors within a specific class calculated as the product of individual feature probabilities under the statistical independence assumption: P(x|y) = prod P(x_i|y).
+"Class-Conditional Probability P(x|y)","**answer:** The distribution of feature vectors within a specific class calculated as the product of individual feature probabilities under the statistical independence assumption: [[MATH]]P(x|y) = prod P(x_i|y)[[/MATH]].
 
 **basic explanation:** This measures how likely those features are if we already know the class, often by multiplying per-feature probabilities.","EX 1"
-"Bayesian Decision Rule","**answer:** Assign an instance to the class with the highest posterior probability: y_hat = argmax_y [ P(y) * P(x|y) ].
+"Bayesian Decision Rule","**answer:** Assign an instance to the class with the highest posterior probability: [[MATH]]y_hat = argmax_y [ P(y) * P(x|y) ][[/MATH]].
 
 **basic explanation:** Compute a score for each class using prior times likelihood, then choose the class with the biggest score.","EX 1"
 "Unnormalized Posteriors","**answer:** In Bayesian classification posteriors do not need to sum to 1 to make a valid decision — only the relative maximum matters.
@@ -35,7 +35,7 @@
 "Gaussian Decision Boundaries — General Case","**answer:** For Gaussian class-conditional densities the decision boundary is a quadratic polynomial (circles ovals parabolas or hyperbolas).
 
 **basic explanation:** With Gaussian classes, the separator is usually curved (quadratic), not a straight line.","EX 2"
-"Gaussian Decision Boundaries — Equal Covariance","**answer:** If both classes share identical covariance matrices (Sigma_1 = Sigma_2) the decision boundary becomes entirely linear.
+"Gaussian Decision Boundaries — Equal Covariance","**answer:** If both classes share identical covariance matrices ([[MATH]]Sigma_1 = Sigma_2[[/MATH]]) the decision boundary becomes entirely linear.
 
 **basic explanation:** If classes have the same covariance shape, quadratic terms cancel and the separator becomes linear.","EX 2"
 "Effect of Prior Probabilities on Decision Boundary","**answer:** A change in prior probabilities introduces a constant offset to the decision boundary. If priors and covariance matrices are identical across classes this offset is zero.
@@ -44,10 +44,10 @@
 "Parameter Estimation — Discriminative Approach","**answer:** For Gaussian class-conditional densities it is easier to directly estimate the decision boundary parameters than to estimate all generative parameters (priors means covariance matrices).
 
 **basic explanation:** Instead of modeling every distribution detail, directly learn the boundary that best separates classes.","EX 2"
-"Non-linear Decision Boundaries","**answer:** A non-linear decision boundary requires that the covariance matrices of the involved Gaussians are NOT identical (Sigma_1 != Sigma_2).
+"Non-linear Decision Boundaries","**answer:** A non-linear decision boundary requires that the covariance matrices of the involved Gaussians are NOT identical ([[MATH]]Sigma_1 != Sigma_2[[/MATH]]).
 
 **basic explanation:** Different covariance matrices create curved boundaries because class spread differs by direction.","EX 2"
-"Log-Likelihood — Assumptions","**answer:** Optimizing the log-likelihood assumes all training samples are mutually independent: L(theta) = sum_i log P(x_i | theta).
+"Log-Likelihood — Assumptions","**answer:** Optimizing the log-likelihood assumes all training samples are mutually independent: [[MATH]]L(theta) = sum_i log P(x_i | theta)[[/MATH]].
 
 **basic explanation:** The objective sums log-probabilities because samples are treated as independent observations.","EX 2"
 "Why Log-Likelihood instead of Likelihood?","**answer:** The logarithm converts a product of very small probabilities into a sum in a reasonable numeric range preventing numerical underflow and simplifying computation (addition vs. multiplication).
@@ -65,10 +65,10 @@
 "Fisher Transform / LDA","**answer:** A formulation of Linear Discriminant Analysis used for dimensionality reduction of feature vectors. Uses known class labels during training to compute an optimal projection axis.
 
 **basic explanation:** LDA finds directions that separate class centers while keeping each class tight, often for dimensionality reduction.","EX 3"
-"Sigma_intra (Intra-class Scatter Matrix)","**answer:** The mean of the covariance matrices of all classes: Sigma_intra = (1/K) * sum_k Sigma_k. Measures how far each individual class is scattered around its own mean.
+"Sigma_intra (Intra-class Scatter Matrix)","**answer:** The mean of the covariance matrices of all classes: [[MATH]]Sigma_intra = (1/K) * sum_k Sigma_k[[/MATH]]. Measures how far each individual class is scattered around its own mean.
 
 **basic explanation:** This matrix summarizes average spread inside classes; smaller spread means cleaner class clusters.","EX 3"
-"Rayleigh Ratio","**answer:** Objective function used in LDA to find a projection axis w that maximizes: R(w) = (w^T Sigma_between w) / (w^T Sigma_intra w). Maximizing this separates class means while keeping each class compact.
+"Rayleigh Ratio","**answer:** Objective function used in LDA to find a projection axis w that maximizes: [[MATH]]R(w) = (w^T Sigma_between w) / (w^T Sigma_intra w)[[/MATH]]. Maximizing this separates class means while keeping each class compact.
 
 **basic explanation:** LDA maximizes between-class separation divided by within-class spread to get the best projection direction.","EX 3"
 "Huber Norm vs. OLS — Outlier Weighting","**answer:** OLS assigns quadratic weight to outliers (high sensitivity); the Huber norm assigns only linear weight to deviations beyond a threshold delta reducing outlier influence.
@@ -89,22 +89,22 @@
 "epsilon-tube (SVR)","**answer:** The region of width +/- epsilon around the regression line within which prediction errors are not penalized.
 
 **basic explanation:** Think of a no-penalty band around predictions: errors inside the band are treated as acceptable noise.","EX 5"
-"SVR Support Vectors","**answer:** Only data points on the boundary or outside the epsilon-tube are support vectors. Mathematically: a point is a support vector if lambda_i - lambda_hat_i != 0 (non-zero Lagrange multiplier difference).
+"SVR Support Vectors","**answer:** Only data points on the boundary or outside the epsilon-tube are support vectors. Mathematically: a point is a support vector if [[MATH]]lambda_i - lambda_hat_i != 0[[/MATH]] (non-zero Lagrange multiplier difference).
 
 **basic explanation:** Only points touching or outside the epsilon band affect the final model parameters.","EX 5"
 "SVR Sparsity","**answer:** Most points fall inside the epsilon-tube and have zero Lagrange multiplier difference resulting in a sparse solution where only boundary or outside points define the regression.
 
 **basic explanation:** Since many points lie inside the epsilon tube, only a subset matters, giving a sparse model.","EX 5"
-"Parameter Estimation — ML","**answer:** Maximum Likelihood: optimizes log-likelihood of observations assuming statistical independence: theta_ML = argmax_theta sum_i log P(x_i | theta).
+"Parameter Estimation — ML","**answer:** Maximum Likelihood: optimizes log-likelihood of observations assuming statistical independence: [[MATH]]theta_ML = argmax_theta sum_i log P(x_i | theta)[[/MATH]].
 
 **basic explanation:** ML chooses parameters that make the observed data most probable under the model.","EX 6"
-"Parameter Estimation — MAP","**answer:** Maximum a Posteriori: incorporates a prior PDF over parameters: theta_MAP = argmax_theta [ sum_i log P(x_i | theta) + log P(theta) ].
+"Parameter Estimation — MAP","**answer:** Maximum a Posteriori: incorporates a prior PDF over parameters: [[MATH]]theta_MAP = argmax_theta [ sum_i log P(x_i | theta) + log P(theta) ][[/MATH]].
 
 **basic explanation:** MAP adds prior beliefs about parameters, balancing data fit with what was already plausible.","EX 6"
 "Parameter Estimation — EM Algorithm","**answer:** Used for high-dimensional spaces or latent/incomplete data. Iterates between E-step (compute probabilities and log-likelihood) and M-step (update parameters) until convergence.
 
 **basic explanation:** EM alternates between estimating hidden assignments and updating parameters until changes become small.","EX 6"
-"Gaussian Mixture Model (GMM)","**answer:** Represents a set of observations as a weighted combination of K multivariate Gaussian distributions: P(x) = sum_{k=1}^{K} p_k * N(x | mu_k Sigma_k).
+"Gaussian Mixture Model (GMM)","**answer:** Represents a set of observations as a weighted combination of K multivariate Gaussian distributions: [[MATH]]P(x) = sum_{k=1}^{K} p_k * N(x | mu_k Sigma_k)[[/MATH]].
 
 **basic explanation:** A GMM models data as several Gaussian clusters, each with its own center, spread, and weight.","EX 6"
 "GMM Complexity Drivers","**answer:** Model complexity is driven by: number of Gaussians K and dimensionality of feature vectors d and total number of feature vectors N.
@@ -137,7 +137,7 @@
 "Kernel Trick","**answer:** Inner products x_i^T x_j are replaced by a positive semidefinite kernel function k(x_i x_j) enabling computation in high-dimensional space implicitly.
 
 **basic explanation:** Use a kernel function to compute high-dimensional dot products without explicitly building high-dimensional vectors.","EX 7"
-"Naive Bayes — Mutual Independence Assumption","**answer:** All dimensions of the feature vector are assumed completely mutually independent: P(x|y) = prod_d P(x_d|y).
+"Naive Bayes — Mutual Independence Assumption","**answer:** All dimensions of the feature vector are assumed completely mutually independent: [[MATH]]P(x|y) = prod_d P(x_d|y)[[/MATH]].
 
 **basic explanation:** Naive Bayes assumes features do not influence each other once class is known.","EX 7"
 "Naive Bayes — Covariance Structure","**answer:** Due to the independence assumption the covariance matrix of each class is strictly diagonal (only variances on the diagonal; all off-diagonal covariances are zero).
@@ -149,6 +149,6 @@
 "SVM vs. Perceptron — Training","**answer:** The Perceptron updates using only misclassified points (mixing continuous and discrete problems); SVM uses all support vectors via a convex quadratic program.
 
 **basic explanation:** Perceptron updates from mistakes only; SVM solves a margin-based optimization using support vectors.","EX 7"
-"SVM vs. Perceptron — Linear Separability","**answer:** The Perceptron fails when classes are not linearly separable; SVM handles this via the soft-margin technique with slack variables xi_i >= 0.
+"SVM vs. Perceptron — Linear Separability","**answer:** The Perceptron fails when classes are not linearly separable; SVM handles this via the soft-margin technique with slack variables [[MATH]]xi_i >= 0[[/MATH]].
 
 **basic explanation:** Perceptron struggles on non-separable data; SVM handles this with soft margins and slack variables.","EX 7"

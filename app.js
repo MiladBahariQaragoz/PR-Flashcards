@@ -47,6 +47,8 @@ const state = {
 const EXAM_CSV_PATH = "./pr_mock2526_solution_questions.csv";
 const FLASHCARD_CSV_PATH = "./flashcards.csv";
 const MOCK_EXAM_CONTEXT = "mock exam";
+const MATH_TAG_START = "[[MATH]]";
+const MATH_TAG_END = "[[/MATH]]";
 
 function slugify(value) {
   return value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "user";
@@ -192,6 +194,161 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function standardizeEquationText(value) {
+  let text = String(value ?? "");
+
+  const replacements = [
+    [/g\(z\)\s*=\s*1\+e[−-]?z/gi, "g(z) = 1/(1+e^{-z})"],
+    [/θTx/g, "θ^T x"],
+    [/θTxi/g, "θ^T x_i"],
+    [/Pm i=1\(yi\s*[−-]\s*g\(θTxi\)\)xi/g, "sum_{i=1}^{m}(y_i - g(θ^T x_i))x_i"],
+    [/P\(x\|y\)\s*=\s*prod\s+P\(x_i\|y\)/gi, "P(x|y) = prod_i P(x_i|y)"],
+    [/P\(x\|y\)\s*=\s*prod_d\s+P\(x_d\|y\)/gi, "P(x|y) = prod_d P(x_d|y)"],
+    [/L\(theta\)\s*=\s*sum_i\s+log\s+P\(x_i\s*\|\s*theta\)/gi, "L(theta) = sum_i log P(x_i | theta)"],
+    [/theta_ML\s*=\s*argmax_theta\s+sum_i\s+log\s+P\(x_i\s*\|\s*theta\)/gi, "theta_ML = argmax_theta sum_i log P(x_i | theta)"],
+    [
+      /theta_MAP\s*=\s*argmax_theta\s*\[\s*sum_i\s+log\s+P\(x_i\s*\|\s*theta\)\s*\+\s*log\s+P\(theta\)\s*\]/gi,
+      "theta_MAP = argmax_theta [ sum_i log P(x_i | theta) + log P(theta) ]",
+    ],
+    [/R\(w\)\s*=\s*\(w\^T\s*Sigma_between\s*w\)\s*\/\s*\(w\^T\s*Sigma_intra\s*w\)/gi, "R(w) = (w^T Sigma_between w) / (w^T Sigma_intra w)"],
+    [/N\(x\s*\|\s*mu_k\s+Sigma_k\)/gi, "N(x | mu_k, Sigma_k)"],
+    [/lambda_i\s*-\s*lambda_hat_i\s*!=\s*0/gi, "lambda_i - lambda_hat_i != 0"],
+    [/D−1\/2U Tx/g, "D^{-1/2}U^T x"],
+    [/J\(r\)\s*=\s*r⊤SBr\s*r⊤SW\s*r/g, "J(r) = (r^T S_B r)/(r^T S_W r)"],
+  ];
+
+  replacements.forEach(([pattern, replacement]) => {
+    text = text.replace(pattern, replacement);
+  });
+
+  return text;
+}
+
+function toLatexExpression(value) {
+  let latex = String(value ?? "").trim();
+
+  latex = latex
+    .replace(/>=/g, "\\ge ")
+    .replace(/<=/g, "\\le ")
+    .replace(/!=/g, "\\ne ")
+    .replace(/\bargmax_([A-Za-z0-9]+)/g, "\\arg\\max_{$1}")
+    .replace(/\bsum_([A-Za-z0-9]+)=([A-Za-z0-9]+)/g, "\\sum_{$1={$2}}")
+    .replace(/\bsum_([A-Za-z0-9]+)/g, "\\sum_{$1}")
+    .replace(/\bprod_([A-Za-z0-9]+)/g, "\\prod_{$1}")
+    .replace(/\bprod\b/g, "\\prod")
+    .replace(/\btheta\b/gi, "\\theta")
+    .replace(/\bSigma\b/g, "\\Sigma")
+    .replace(/\bmu\b/g, "\\mu")
+    .replace(/\blambda\b/g, "\\lambda")
+    .replace(/\bphi\b/gi, "\\phi")
+    .replace(/\|/g, "\\mid ");
+
+  return latex;
+}
+
+function countMatches(text, pattern) {
+  const matches = text.match(pattern);
+  return matches ? matches.length : 0;
+}
+
+function isLikelyMathExpression(candidate) {
+  const text = String(candidate ?? "").trim();
+  if (!text) {
+    return false;
+  }
+
+  if (!/(<=|>=|!=|=|≤|≥|≠)/.test(text)) {
+    return false;
+  }
+
+  const lower = text.toLowerCase();
+  const greekOrNamedSignals = /(theta|sigma|lambda|mu|phi|argmax|sum|prod|log|exp|sqrt|logit|odds|f1|tpr|fpr|npv|acc|precision|recall|\blda\b|\bgmm\b|\bem\b|\bsvr\b|θ|ϕ|φ|λ|μ|Σ|∇|Ω|π)/i;
+  const structuralSignals = /(\^|_|\(|\)|\[|\]|\{|\}|\/|\*|\+|\-|\|)/;
+  const variableSignals = /(\b[a-zA-Z]\d+\b|\b[a-zA-Z]_[a-zA-Z0-9]+\b|\b[a-zA-Z]\s*[\*\/+\-]\s*[a-zA-Z0-9]|\b[a-zA-Z]+\([^\)]*\))/;
+  const numericSignals = /\d/;
+
+  const hasStrongSignal = greekOrNamedSignals.test(text) || structuralSignals.test(text) || variableSignals.test(text);
+  const hasNumericSignal = numericSignals.test(text);
+
+  if (!hasStrongSignal && !hasNumericSignal) {
+    return false;
+  }
+
+  const longWordCount = countMatches(lower, /\b[a-z]{5,}\b/g);
+  const symbolCount = countMatches(text, /[\^_\(\)\[\]\{\}\/\*\+\-|]/g);
+  const operatorCount = countMatches(text, /<=|>=|!=|=|≤|≥|≠/g);
+
+  // Reject prose-like phrases that happen to include '=' but lack equation structure.
+  if (longWordCount >= 6 && symbolCount <= 1 && operatorCount === 1 && !greekOrNamedSignals.test(text)) {
+    return false;
+  }
+
+  return true;
+}
+
+function wrapMathSegments(value) {
+  const text = String(value ?? "");
+  const candidatePattern = /([^\n<>.]{1,120}(?:<=|>=|!=|=|≤|≥|≠)[^\n<>.]{1,120})/g;
+
+  return text.replace(candidatePattern, (match) => {
+    const compact = match.trim().replace(/\s+/g, " ");
+
+    if (!isLikelyMathExpression(compact)) {
+      return match;
+    }
+
+    // If a sentence contains a colon before the formula, keep only the formula part in math mode.
+    const colonIndex = compact.lastIndexOf(":");
+    const equationCandidate = colonIndex >= 0 ? compact.slice(colonIndex + 1).trim() : compact;
+
+    if (!isLikelyMathExpression(equationCandidate)) {
+      return match;
+    }
+
+    const mathWrapped = `\\(${toLatexExpression(equationCandidate)}\\)`;
+    if (colonIndex >= 0) {
+      return `${compact.slice(0, colonIndex + 1)} ${mathWrapped}`;
+    }
+
+    return mathWrapped;
+  });
+}
+
+function wrapTaggedMathSegments(value) {
+  const text = String(value ?? "");
+  if (!text.includes(MATH_TAG_START) || !text.includes(MATH_TAG_END)) {
+    return text;
+  }
+
+  return text.replace(/\[\[MATH\]\]([\s\S]*?)\[\[\/MATH\]\]/g, (_match, expression) => {
+    const trimmed = String(expression ?? "").trim();
+    if (!trimmed) {
+      return "";
+    }
+
+    return `\\(${toLatexExpression(trimmed)}\\)`;
+  });
+}
+
+function formatRichText(value) {
+  const normalized = standardizeEquationText(value);
+  const withTaggedMath = wrapTaggedMathSegments(normalized);
+  const withMath = withTaggedMath.includes("\\(") ? withTaggedMath : wrapMathSegments(withTaggedMath);
+  const escaped = escapeHtml(withMath);
+  const withBold = escaped.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  return withBold.replace(/\r?\n/g, "<br>");
+}
+
+function typesetMath(root) {
+  if (!root || !window.MathJax || typeof window.MathJax.typesetPromise !== "function") {
+    return;
+  }
+
+  window.MathJax.typesetPromise([root]).catch((error) => {
+    console.error("MathJax typeset failed", error);
+  });
+}
+
 function formatFlashcardBack(value) {
   const raw = String(value ?? "").trim();
   if (!raw) {
@@ -204,14 +361,14 @@ function formatFlashcardBack(value) {
   const plainMatch = raw.match(plainPattern);
 
   if (markdownMatch) {
-    return `<strong>answer:</strong> ${escapeHtml(markdownMatch[1].trim())}<br><br><strong>basic explanation:</strong> ${escapeHtml(markdownMatch[2].trim())}`;
+    return `<strong>answer:</strong> ${formatRichText(markdownMatch[1].trim())}<br><br><strong>basic explanation:</strong> ${formatRichText(markdownMatch[2].trim())}`;
   }
 
   if (plainMatch) {
-    return `<strong>answer:</strong> ${escapeHtml(plainMatch[1].trim())}<br><br><strong>basic explanation:</strong> ${escapeHtml(plainMatch[2].trim())}`;
+    return `<strong>answer:</strong> ${formatRichText(plainMatch[1].trim())}<br><br><strong>basic explanation:</strong> ${formatRichText(plainMatch[2].trim())}`;
   }
 
-  return escapeHtml(raw).replace(/\r?\n/g, "<br>");
+  return formatRichText(raw);
 }
 
 function splitImageList(value) {
@@ -228,7 +385,7 @@ function buildOptionRecords(record) {
   return letters
     .map((letter, index) => ({
       letter,
-      text: record[`Option ${letter}`] || "",
+      text: standardizeEquationText(record[`Option ${letter}`] || ""),
       image: optionImageFiles[index] || "",
     }))
     .filter((option) => option.text || option.image);
@@ -244,8 +401,8 @@ function mapExamRecordToCard(record, index) {
   return {
     id: `mock-${index}`,
     cardType: "mcq",
-    Front: questionText,
-    Back: correctAnswer,
+    Front: standardizeEquationText(questionText),
+    Back: standardizeEquationText(correctAnswer),
     Context: MOCK_EXAM_CONTEXT,
     questionNumber,
     questionType,
@@ -253,12 +410,12 @@ function mapExamRecordToCard(record, index) {
     options: buildOptionRecords(record),
     correctAnswer,
     explanations: {
-      A: record["Explanation A"] || "",
-      B: record["Explanation B"] || "",
-      C: record["Explanation C"] || "",
-      D: record["Explanation D"] || "",
-      E: record["Explanation E"] || "",
-      F: record["Explanation F"] || "",
+      A: standardizeEquationText(record["Explanation A"] || ""),
+      B: standardizeEquationText(record["Explanation B"] || ""),
+      C: standardizeEquationText(record["Explanation C"] || ""),
+      D: standardizeEquationText(record["Explanation D"] || ""),
+      E: standardizeEquationText(record["Explanation E"] || ""),
+      F: standardizeEquationText(record["Explanation F"] || ""),
     },
   };
 }
@@ -267,8 +424,8 @@ function mapFlashcardRecordToCard(record, index) {
   return {
     id: `deck-${index}`,
     cardType: "flashcard",
-    Front: record.Front || "",
-    Back: record.Back || "",
+    Front: standardizeEquationText(record.Front || ""),
+    Back: standardizeEquationText(record.Back || ""),
     Context: record.Context || "General",
     questionNumber: "",
     questionType: "Flashcard",
@@ -333,7 +490,7 @@ function renderMcqExplanations(card) {
 
     const detail = document.createElement("p");
     detail.className = "explanation-item-text";
-    detail.textContent = optionExplanation(card, option.letter) || "No explanation provided.";
+    detail.innerHTML = formatRichText(optionExplanation(card, option.letter) || "No explanation provided.");
 
     block.append(header, detail);
     explanationList.appendChild(block);
@@ -555,7 +712,7 @@ function renderCard() {
   const visibleCards = filteredCards();
   const index = visibleCards.findIndex((entry) => entry.id === card.id) + 1;
 
-  elements.frontText.textContent = card.Front;
+  elements.frontText.innerHTML = formatRichText(card.Front);
   elements.frontContext.textContent = isMcqCard(card)
     ? `${MOCK_EXAM_CONTEXT} • ${card.questionType} ${card.questionNumber}`
     : card.Context;
@@ -587,7 +744,7 @@ function renderCard() {
 
       const optionText = document.createElement("span");
       optionText.className = "option-text";
-      optionText.textContent = option.text;
+      optionText.innerHTML = formatRichText(option.text);
 
       optionChoice.append(optionLabel, optionText);
 
@@ -608,8 +765,8 @@ function renderCard() {
 
   if (isMcqCard(card)) {
     elements.frontHint.textContent = "Tap to show answer and structured explanations.";
-    elements.backAnswer.textContent = card.correctAnswer
-      ? `Correct answer: ${card.correctAnswer}`
+    elements.backAnswer.innerHTML = card.correctAnswer
+      ? `<strong>Correct answer:</strong> ${formatRichText(card.correctAnswer)}`
       : "Correct answer unavailable";
     renderMcqExplanations(card);
   } else {
@@ -619,6 +776,7 @@ function renderCard() {
   }
 
   elements.cardCounter.textContent = `Card ${index} of ${visibleCards.length}`;
+  typesetMath(elements.flashcardButton);
 }
 
 function render() {

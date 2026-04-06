@@ -482,6 +482,14 @@ h1 {
   line-height: 1.45;
 }
 
+.option-text .mjx-container,
+.back-text .mjx-container,
+.back-details .mjx-container,
+.explanation-item-text .mjx-container,
+.flashcard h2 .mjx-container {
+  font-size: 1.03em;
+}
+
 .option-list img {
   grid-column: 1 / span 2;
   margin-top: 0.45rem;
@@ -495,6 +503,11 @@ h1 {
   margin-bottom: 0;
   font-size: clamp(1.2rem, 2.4vw, 1.6rem);
   line-height: 1.4;
+}
+
+.back-text strong {
+  display: inline-block;
+  margin-right: 0.35rem;
 }
 
 .back-details {
