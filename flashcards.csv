@@ -1,0 +1,154 @@
+﻿"Front","Back","Context"
+"Representative Sample","**answer:** Probabilities must be estimated using comprehensive previously collected data to accurately represent reality.
+
+**basic explanation:** Use enough real-world past data so your probability estimates are trustworthy, not based on a small biased sample.","EX 1"
+"Features","**answer:** The specific defining characteristics (e.g. chosen words) that effectively identify and differentiate the target classes.
+
+**basic explanation:** Features are the measurable clues (like words or values) a model uses to tell one class from another.","EX 1"
+"Compact Domain","**answer:** Selecting only those features that display distinctly differing probabilities between classes to optimize the model.
+
+**basic explanation:** Keep only features that clearly separate classes, so the model stays simpler and learns faster.","EX 1"
+"Simpler Constituents","**answer:** Breaking down complex input data (e.g. full text) into manageable atomic units (e.g. individual words).
+
+**basic explanation:** Split complex data into small pieces (like words) so algorithms can count and compare them.","EX 1"
+"Structure (in feature models)","**answer:** The arrangement of components such as sentence structure or word ordering — notably disregarded when features are assumed independent.
+
+**basic explanation:** If a model assumes independence, it ignores word order and focuses only on which features appear.","EX 1"
+"Similarity (in classification)","**answer:** The underlying assumption that patterns containing similar features belong to similar classes.
+
+**basic explanation:** If two examples look alike in their features, the model assumes they likely belong to the same class.","EX 1"
+"Prior Probability P(y)","**answer:** The baseline probability of a class occurring known before analyzing any specific features or data points.
+
+**basic explanation:** This is your starting belief about class frequency before seeing the current input.","EX 1"
+"Class-Conditional Probability P(x|y)","**answer:** The distribution of feature vectors within a specific class calculated as the product of individual feature probabilities under the statistical independence assumption: P(x|y) = prod P(x_i|y).
+
+**basic explanation:** This measures how likely those features are if we already know the class, often by multiplying per-feature probabilities.","EX 1"
+"Bayesian Decision Rule","**answer:** Assign an instance to the class with the highest posterior probability: y_hat = argmax_y [ P(y) * P(x|y) ].
+
+**basic explanation:** Compute a score for each class using prior times likelihood, then choose the class with the biggest score.","EX 1"
+"Unnormalized Posteriors","**answer:** In Bayesian classification posteriors do not need to sum to 1 to make a valid decision — only the relative maximum matters.
+
+**basic explanation:** For choosing the best class, exact normalization is unnecessary because only the largest value matters.","EX 1"
+"Posterior Probability Modeling","**answer:** Posteriors can be modeled as F(x) passed through the logistic (sigmoid) function. If F(x) > 0 the predicted class approaches 0; if F(x) <= 0 the class approaches 1.
+
+**basic explanation:** A scoring function is passed through a sigmoid to convert it into a class probability between 0 and 1.","EX 2"
+"Gaussian Decision Boundaries — General Case","**answer:** For Gaussian class-conditional densities the decision boundary is a quadratic polynomial (circles ovals parabolas or hyperbolas).
+
+**basic explanation:** With Gaussian classes, the separator is usually curved (quadratic), not a straight line.","EX 2"
+"Gaussian Decision Boundaries — Equal Covariance","**answer:** If both classes share identical covariance matrices (Sigma_1 = Sigma_2) the decision boundary becomes entirely linear.
+
+**basic explanation:** If classes have the same covariance shape, quadratic terms cancel and the separator becomes linear.","EX 2"
+"Effect of Prior Probabilities on Decision Boundary","**answer:** A change in prior probabilities introduces a constant offset to the decision boundary. If priors and covariance matrices are identical across classes this offset is zero.
+
+**basic explanation:** Changing class priors shifts the boundary toward the less likely class, acting like a constant bias term.","EX 2"
+"Parameter Estimation — Discriminative Approach","**answer:** For Gaussian class-conditional densities it is easier to directly estimate the decision boundary parameters than to estimate all generative parameters (priors means covariance matrices).
+
+**basic explanation:** Instead of modeling every distribution detail, directly learn the boundary that best separates classes.","EX 2"
+"Non-linear Decision Boundaries","**answer:** A non-linear decision boundary requires that the covariance matrices of the involved Gaussians are NOT identical (Sigma_1 != Sigma_2).
+
+**basic explanation:** Different covariance matrices create curved boundaries because class spread differs by direction.","EX 2"
+"Log-Likelihood — Assumptions","**answer:** Optimizing the log-likelihood assumes all training samples are mutually independent: L(theta) = sum_i log P(x_i | theta).
+
+**basic explanation:** The objective sums log-probabilities because samples are treated as independent observations.","EX 2"
+"Why Log-Likelihood instead of Likelihood?","**answer:** The logarithm converts a product of very small probabilities into a sum in a reasonable numeric range preventing numerical underflow and simplifying computation (addition vs. multiplication).
+
+**basic explanation:** Logs turn tiny probability products into stable sums, avoiding underflow and making optimization easier.","EX 2"
+"Convexity of Negative Log-Likelihood","**answer:** The negative log-likelihood (cross-entropy) is a convex function — it behaves like a bowl with no local minima allowing gradient descent to find the global minimum.
+
+**basic explanation:** A convex loss has one best basin, so gradient methods are less likely to get stuck in bad local minima.","EX 2"
+"Newton-Raphson Algorithm","**answer:** Used to maximize the log-likelihood; has built-in step-size control via the Hessian resulting in faster convergence with fewer iterations compared to standard gradient descent.
+
+**basic explanation:** Newton uses both slope and curvature, so it often reaches the optimum in fewer steps than plain gradient descent.","EX 2"
+"Gradient Descent (vs. Newton-Raphson)","**answer:** An alternative optimization method but without step-size control leading to slower convergence.
+
+**basic explanation:** Gradient descent follows slope only, so it is simpler but may need many more iterations.","EX 2"
+"Fisher Transform / LDA","**answer:** A formulation of Linear Discriminant Analysis used for dimensionality reduction of feature vectors. Uses known class labels during training to compute an optimal projection axis.
+
+**basic explanation:** LDA finds directions that separate class centers while keeping each class tight, often for dimensionality reduction.","EX 3"
+"Sigma_intra (Intra-class Scatter Matrix)","**answer:** The mean of the covariance matrices of all classes: Sigma_intra = (1/K) * sum_k Sigma_k. Measures how far each individual class is scattered around its own mean.
+
+**basic explanation:** This matrix summarizes average spread inside classes; smaller spread means cleaner class clusters.","EX 3"
+"Rayleigh Ratio","**answer:** Objective function used in LDA to find a projection axis w that maximizes: R(w) = (w^T Sigma_between w) / (w^T Sigma_intra w). Maximizing this separates class means while keeping each class compact.
+
+**basic explanation:** LDA maximizes between-class separation divided by within-class spread to get the best projection direction.","EX 3"
+"Huber Norm vs. OLS — Outlier Weighting","**answer:** OLS assigns quadratic weight to outliers (high sensitivity); the Huber norm assigns only linear weight to deviations beyond a threshold delta reducing outlier influence.
+
+**basic explanation:** OLS can be dominated by outliers, while Huber reduces their influence after an error threshold.","EX 4"
+"Huber Norm — Robustness","**answer:** The Huber approach is advantageous when a dataset contains a few outliers that should not disproportionately influence the model.
+
+**basic explanation:** Huber is useful when most data is clean but a few bad points should not control the fit.","EX 4"
+"Huber Loss — Convexity","**answer:** Regression parameters a and b enter the Huber function as linear arguments. The sum of Huber functions over all measurements remains convex because the sum of convex functions is convex.
+
+**basic explanation:** Because Huber is convex and parameters enter linearly, optimization remains stable and well-behaved.","EX 4"
+"Global Minimum of Convex Functions","**answer:** A convex function on an open domain has zero or one critical points; if a critical point exists it is guaranteed to be the global minimum.
+
+**basic explanation:** For convex objectives, any critical point is the best overall solution, not just a local one.","EX 4"
+"Support Vector Regression (SVR)","**answer:** SVR predicts continuous values using a linear regression function penalizing only deviations larger than a threshold epsilon (the epsilon-tube). Points inside the tube incur zero loss.
+
+**basic explanation:** SVR fits a line (or curve) and ignores small errors inside an epsilon margin, penalizing only larger misses.","EX 5"
+"epsilon-tube (SVR)","**answer:** The region of width +/- epsilon around the regression line within which prediction errors are not penalized.
+
+**basic explanation:** Think of a no-penalty band around predictions: errors inside the band are treated as acceptable noise.","EX 5"
+"SVR Support Vectors","**answer:** Only data points on the boundary or outside the epsilon-tube are support vectors. Mathematically: a point is a support vector if lambda_i - lambda_hat_i != 0 (non-zero Lagrange multiplier difference).
+
+**basic explanation:** Only points touching or outside the epsilon band affect the final model parameters.","EX 5"
+"SVR Sparsity","**answer:** Most points fall inside the epsilon-tube and have zero Lagrange multiplier difference resulting in a sparse solution where only boundary or outside points define the regression.
+
+**basic explanation:** Since many points lie inside the epsilon tube, only a subset matters, giving a sparse model.","EX 5"
+"Parameter Estimation — ML","**answer:** Maximum Likelihood: optimizes log-likelihood of observations assuming statistical independence: theta_ML = argmax_theta sum_i log P(x_i | theta).
+
+**basic explanation:** ML chooses parameters that make the observed data most probable under the model.","EX 6"
+"Parameter Estimation — MAP","**answer:** Maximum a Posteriori: incorporates a prior PDF over parameters: theta_MAP = argmax_theta [ sum_i log P(x_i | theta) + log P(theta) ].
+
+**basic explanation:** MAP adds prior beliefs about parameters, balancing data fit with what was already plausible.","EX 6"
+"Parameter Estimation — EM Algorithm","**answer:** Used for high-dimensional spaces or latent/incomplete data. Iterates between E-step (compute probabilities and log-likelihood) and M-step (update parameters) until convergence.
+
+**basic explanation:** EM alternates between estimating hidden assignments and updating parameters until changes become small.","EX 6"
+"Gaussian Mixture Model (GMM)","**answer:** Represents a set of observations as a weighted combination of K multivariate Gaussian distributions: P(x) = sum_{k=1}^{K} p_k * N(x | mu_k Sigma_k).
+
+**basic explanation:** A GMM models data as several Gaussian clusters, each with its own center, spread, and weight.","EX 6"
+"GMM Complexity Drivers","**answer:** Model complexity is driven by: number of Gaussians K and dimensionality of feature vectors d and total number of feature vectors N.
+
+**basic explanation:** More clusters, higher dimensions, and more samples all increase computation and parameter count.","EX 6"
+"EM Parameters for GMM","**answer:** EM iteratively estimates: means mu_k and covariance matrices Sigma_k and mixture weights p_k and per-sample component probabilities P(k | x_i).
+
+**basic explanation:** EM updates cluster means, covariances, mixing weights, and each sample's probability of belonging to each cluster.","EX 6"
+"EM Initialization","**answer:** Typically initialized using k-means clustering to obtain initial mean estimates mu_k from which initial covariance matrices and mixture weights are computed.
+
+**basic explanation:** Good starting clusters (often from k-means) help EM avoid poor solutions and converge faster.","EX 6"
+"EM Convergence","**answer:** EM convergence is generally slow; appropriate initialization (e.g. via k-means) improves performance.
+
+**basic explanation:** EM usually improves steadily but can be slow, so initialization quality matters a lot.","EX 6"
+"Generative Modeling","**answer:** Estimates both the prior P(y) and the class-conditional P(x|y) then applies Bayes rule to obtain the posterior P(y|x).
+
+**basic explanation:** Generative methods learn how data is produced in each class, then use Bayes rule for classification.","EX 7"
+"Discriminative Modeling","**answer:** Directly estimates the posterior P(y|x) without modeling P(x|y) or P(y) separately.
+
+**basic explanation:** Discriminative methods directly learn the class boundary or posterior without modeling full data generation.","EX 7"
+"PCA vs. LDA — Labels","**answer:** PCA does not require labeled data; LDA requires labeled classes to measure between-class and within-class distances.
+
+**basic explanation:** PCA is unsupervised (no labels), while LDA is supervised and needs class labels.","EX 7"
+"PCA vs. LDA — Output Dimensions","**answer:** PCA can project to any arbitrary dimension with mutually orthogonal components; LDA output dimensions are bounded by (number of classes - 1).
+
+**basic explanation:** PCA can keep many components; LDA can produce at most number-of-classes minus one useful axes.","EX 7"
+"Kernel PCA — Key Idea","**answer:** Features are virtually mapped into a higher-dimensional space where they become linearly separable without explicitly computing the mapping.
+
+**basic explanation:** Kernel PCA separates nonlinear patterns by implicitly mapping data into a higher-dimensional feature space.","EX 7"
+"Kernel Trick","**answer:** Inner products x_i^T x_j are replaced by a positive semidefinite kernel function k(x_i x_j) enabling computation in high-dimensional space implicitly.
+
+**basic explanation:** Use a kernel function to compute high-dimensional dot products without explicitly building high-dimensional vectors.","EX 7"
+"Naive Bayes — Mutual Independence Assumption","**answer:** All dimensions of the feature vector are assumed completely mutually independent: P(x|y) = prod_d P(x_d|y).
+
+**basic explanation:** Naive Bayes assumes features do not influence each other once class is known.","EX 7"
+"Naive Bayes — Covariance Structure","**answer:** Due to the independence assumption the covariance matrix of each class is strictly diagonal (only variances on the diagonal; all off-diagonal covariances are zero).
+
+**basic explanation:** Independence means only variances remain; cross-feature covariance terms are zero.","EX 7"
+"SVM vs. Perceptron — Convexity","**answer:** SVM is a strictly convex optimization problem via Lagrangian duality guaranteeing a unique solution that maximizes the margin to the decision hyperplane.
+
+**basic explanation:** SVM optimization is convex, so it has a unique global optimum and a maximum-margin boundary.","EX 7"
+"SVM vs. Perceptron — Training","**answer:** The Perceptron updates using only misclassified points (mixing continuous and discrete problems); SVM uses all support vectors via a convex quadratic program.
+
+**basic explanation:** Perceptron updates from mistakes only; SVM solves a margin-based optimization using support vectors.","EX 7"
+"SVM vs. Perceptron — Linear Separability","**answer:** The Perceptron fails when classes are not linearly separable; SVM handles this via the soft-margin technique with slack variables xi_i >= 0.
+
+**basic explanation:** Perceptron struggles on non-separable data; SVM handles this with soft margins and slack variables.","EX 7"

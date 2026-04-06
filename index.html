@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
+    <title><PR-Flashcards></title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">No database</p>
+          <h1>PR-Flashcards</h1>
+          <p class="subtitle">Study the CSV deck and keep progress separately for each name on this device.</p>
+        </div>
+        <div class="user-chip">
+          <span id="userLabel">Guest</span>
+          <button id="switchUserButton" type="button">Switch user</button>
+        </div>
+      </header>
+
+      <section class="stats-grid" aria-label="Study stats">
+        <article class="stat-card">
+          <span class="stat-label">Deck size</span>
+          <strong id="deckSize">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Mastered</span>
+          <strong id="masteredCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Needs review</span>
+          <strong id="reviewCount">0</strong>
+        </article>
+        <article class="stat-card progress-card">
+          <div class="progress-row">
+            <span class="stat-label">Progress</span>
+            <strong id="progressText">0%</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="controls-panel" aria-label="Filters and navigation">
+        <label class="field">
+          <span>Context</span>
+          <select id="contextFilter">
+            <option value="all">All contexts</option>
+          </select>
+        </label>
+        <label class="field search-field">
+          <span>Search</span>
+          <input id="searchInput" type="search" placeholder="Find a term or keyword" />
+        </label>
+        <div class="action-row">
+          <button id="previousButton" type="button" class="secondary">Previous</button>
+          <button id="shuffleButton" type="button" class="secondary">Shuffle filtered</button>
+          <button id="resetButton" type="button" class="secondary danger">Reset progress</button>
+        </div>
+      </section>
+
+      <section class="flashcard-stage">
+        <div class="card-counter" id="cardCounter">Card 0 of 0</div>
+
+        <button id="flashcardButton" type="button" class="flashcard" aria-live="polite">
+          <div class="flashcard-inner">
+            <div class="flashcard-face flashcard-front">
+              <span class="face-label">Front</span>
+              <h2 id="frontText">Loading...</h2>
+              <p id="frontContext" class="face-context"></p>
+              <div id="frontMedia" class="front-media" aria-live="polite"></div>
+              <div id="frontOptions" class="front-options" aria-live="polite"></div>
+              <p id="frontHint" class="hint">Tap to reveal the answer</p>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <span class="face-label">Back</span>
+              <p id="backAnswer" class="back-text"></p>
+              <div id="backDetails" class="back-details"></div>
+            </div>
+          </div>
+        </button>
+
+        <div class="action-row primary-actions">
+          <button id="knownButton" type="button" class="success">I knew it</button>
+          <button id="reviewButton" type="button" class="warning">Review later</button>
+          <button id="nextButton" type="button">Next</button>
+        </div>
+      </section>
+
+      <section class="queue-panel">
+        <div>
+          <h3>Visible queue</h3>
+          <p class="queue-description">Only matching cards are shown. Your progress is saved under the current name on this browser.</p>
+        </div>
+        <ul id="queueList" class="queue-list"></ul>
+      </section>
+    </main>
+
+    <div id="nameModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="nameModalTitle">
+      <div class="modal-card">
+        <p class="eyebrow">Welcome</p>
+        <h2 id="nameModalTitle">Enter your name to save progress</h2>
+        <p class="modal-copy">Each name gets its own saved study state on this device. No account or backend is required.</p>
+        <form id="nameForm" class="modal-form">
+          <label class="field">
+            <span>Your name</span>
+            <input id="nameInput" type="text" maxlength="40" autocomplete="name" placeholder="e.g. Alex" required />
+          </label>
+          <button type="submit">Start studying</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

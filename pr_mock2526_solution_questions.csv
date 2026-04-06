@@ -1,0 +1,300 @@
+Question Number,Question Type,Question Text,Question Image File,Option A,Option B,Option C,Option D,Option E,Option F,Options Image Files,Correct Answer,Explanation A,Explanation B,Explanation C,Explanation D,Explanation E,Explanation F
+1.1,MCQ,"We discussed the 6 fundamental postulates of pattern recognition. Postulate 6 states ""Similarity through feature space proximity"". Which of the following statements best describes this postulate? (SC)",,Two patterns are similar if their features differ only lightly. This implies that small differences in the input features should not change the classification drastically.,"Patterns belonging to the same class form a compact group in the feature space, meaning their features are similar to each other.",A pattern consists of simpler constituents which have certain relations to each other and can be decomposed into these constituents.,"A complex pattern has a certain structure, meaning that not any arrangement of simpler constituents is a valid pattern.",,,,A,"Explanation: **Correct** - Postulate 6 (Similarity through feature space proximity) states that patterns with similar features in the feature space should be classified similarly. Small differences in features lead to small differences in classification.
+
+Basic explanation (HS level): Small feature changes = small classification changes. This is the core of Postulate 6 about proximity meaning similarity.","Explanation: **Incorrect** - This describes Postulate 3 (Compactness and Separability), which addresses how patterns of the same class cluster together in feature space.
+
+Basic explanation (HS level): This describes clustering patterns, not similarity through proximity.","Explanation: **Incorrect** - This describes Postulate 4 (Decomposability), which states that patterns consist of simpler components with relationships.
+
+Basic explanation (HS level): This is about breaking patterns into pieces, not about similarity in features.","Explanation: **Incorrect** - This describes Postulate 5 (Structural Constraints), which addresses the structure and validity of pattern arrangements.
+
+Basic explanation (HS level): This is about pattern structure, not feature similarity.",,
+1.2,MCQ,Why is convexity an important property in optimization problems? (SC),,"It guarantees that the problem has a closed-form analytical solution, eliminating the need for iterative algorithms like Gradient Descent.","It ensures that any local minimum is also a global minimum, preventing the optimization algorithm from getting stuck in local optima.","It implies that the objective function is linear, which ensures that the computational complexity of the optimization is always linear.","It ensures that the Hessian matrix is always indefinite, allowing the algorithm to escape saddle points more efficiently.",,,,B,"Explanation: **Incorrect** - Convexity does NOT guarantee closed-form solutions. Many convex problems require iterative algorithms. The key property is uniqueness, not solvability via closed form.
+
+Basic explanation (HS level): Convex problems can still need iterative solvers like gradient descent.","Explanation: **Correct** - Convexity is crucial because it ensures any local minimum is also a global minimum. This prevents optimization algorithms from getting stuck in local optima, a major problem in non-convex optimization.
+
+Basic explanation (HS level): In a bowl-shaped (convex) surface, the lowest point you find is always the global best. This prevents getting trapped in local valleys.","Explanation: **Incorrect** - Convexity does NOT imply linearity. Many convex functions are highly nonlinear (e.g., quadratic). Computational complexity is not necessarily linear either.
+
+Basic explanation (HS level): Quadratic functions are convex but not linear.","Explanation: **Incorrect** - Convexity ensures the Hessian is positive semi-definite (not indefinite). An indefinite Hessian indicates saddle points, which contradicts convexity.
+
+Basic explanation (HS level): The math shows convexity gives positive definiteness, not indefiniteness.",,
+1.3,MCQ,State which of the 4 following statements are true for discriminative and/or generative models: (MC),,It directly models the decision boundary,It can classify an input feature vector,It models class distributions,It can be trained with training data,,,,1. Discriminative model; 2. Discriminative and Generative model; 3. Generative model; 4. Discriminative and Generative model,"Explanation: Discriminative models directly model decision boundaries without estimating class distributions.
+
+Basic explanation (HS level): Discriminative = focuses on separating classes, not on understanding each class.","Explanation: Both discriminative and generative models can classify because they both make predictions; generative models do it via Bayes rule.
+
+Basic explanation (HS level): Both types can predict - discriminative directly, generative indirectly.","Explanation: Generative models explicitly model class distributions p(x|y) to understand the data structure.
+
+Basic explanation (HS level): Generative = tries to understand and generate data from each class.","Explanation: Both can be trained with training data. Discriminative optimizes decision boundaries; generative builds probability models.
+
+Basic explanation (HS level): Both need data, just use it differently.",,
+2.1,MCQ,"As you explain the model choice to the Health Commissioner, which of the following statements correctly describe the fundamental properties of your Logistic Regression model?",,"It is a generative model that estimates the joint density p(x, y) of the population’s health data before applying Bayes’ rule.",It is a discriminative model that directly estimates the risk p(y|x) without modeling how environmental features p(x|y) are distributed.,"Unlike a simple Perceptron, it outputs a calibrated probability value between 0 and 1, allowing for nuanced risk tiers.",It requires the assumption that the feature distributions for healthy and ill residents are Gaussian with equal covariance matrices.,"It is solved using a closed-form analytical solution, making training instantaneous once the data is collected.",,,"B, C","Explanation: **Incorrect** - Logistic Regression is discriminative, not generative. It does NOT estimate p(x,y). It directly estimates p(y|x).
+
+Basic explanation (HS level): Logistic regression does not model how features are distributed (that's generative). It only predicts probability of the outcome.","Explanation: **Correct** - Logistic Regression is fundamentally a discriminative model. It estimates p(y|x) without modeling p(x|y), the feature distributions.
+
+Basic explanation (HS level): Logistic regression directly predicts risk without needing to understand feature structure for each class.","Explanation: **Correct** - Unlike the Perceptron (which outputs 0 or 1), Logistic Regression uses the sigmoid function to output probabilities between 0 and 1. This enables risk stratification.
+
+Basic explanation (HS level): Logistic regression gives probabilities like 0.3 or 0.8, not just yes/no. This is useful for risk levels.","Explanation: **Incorrect** - Logistic Regression does NOT assume Gaussian distributions or equal covariance. These assumptions are required for LDA (Linear Discriminant Analysis), not Logistic Regression.
+
+Basic explanation (HS level): Logistic regression is more flexible. It doesn't need these specific distribution assumptions.","Explanation: **Incorrect** - Logistic Regression uses iterative numerical methods (gradient ascent), not a closed-form analytical solution. Training requires iteration.
+
+Basic explanation (HS level): Logistic regression requires an iterative algorithm; it doesn't have a direct formula like linear regression.",
+2.2,MCQ,"To map health scores to probabilities, you use the logistic sigmoid function g(z) = 1+e−z . Which of the following mathematical properties of this ""risk curve"" are valid?",,The function satisfies the symmetry relation g(−z) = −g(z).,The sensitivity (derivative) can be expressed using the risk value itself: g′(z) = g(z)(1 −g(z)).,"The function maps any real-valued health score strictly monotonically to a probability in (0, 1).","At a neutral score of 0, the predicted risk is g(0) = 0.",The function satisfies the symmetry relation g(−z) = 1 −g(z).,,,"B, C, E","Explanation: **Incorrect** - The sigmoid satisfies g(-z) = 1 - g(z), NOT g(-z) = -g(z). The sigmoid is an odd function around 0.5.
+
+Basic explanation (HS level): Sigmoid centered at 0.5, not 0. At z=1, g(1)=0.73 and g(-1)=0.27, which sum to 1, not negate.","Explanation: **Correct** - The derivative of sigmoid is indeed g'(z) = g(z)(1-g(z)). This elegant property shows sensitivity depends on the current probability.
+
+Basic explanation (HS level): This is the key mathematical property: the slope at any point depends on the probability there. At p=0.5, slope is maximum (0.25).","Explanation: **Correct** - The sigmoid maps any real z to (0,1) strictly monotonically. It continuously increases without leveling off until the asymptotes.
+
+Basic explanation (HS level): No matter how large or small z, sigmoid always stays between 0 and 1 and always increases.","Explanation: **Incorrect** - g(0) = 1/(1+e^0) = 1/2 = 0.5, NOT 0. The threshold is at 0 in log-odds space.
+
+Basic explanation (HS level): At neutral score 0, risk is 0.5 (50-50), not 0.","Explanation: **Correct** - This is the symmetry property: g(-z) + g(z) = 1, therefore g(-z) = 1 - g(z). This shows the sigmoid's antisymmetry around 0.5.
+
+Basic explanation (HS level): The curve is perfectly mirrored around the 0.5 line.",
+2.3,MCQ,"You define a ""High Risk"" alert when p(y = 1|x) ≥0.5. Which statements regarding the geometric boundary between ""At Risk"" and ""Safe"" zones are correct?",,The decision boundary is the set of points where the log-odds (logit) of falling ill equal 0.,The decision boundary is defined by the hyperplane θTx = 0.5.,The decision boundary is linear in the feature space defined by x.,"If we use non-linear transformations ϕ(x) (e.g., squaring the age), the decision boundary must still be linear in the original input space.",Residents lying exactly on the decision boundary have a predicted risk probability of 0.5.,,,"A, C, E","Explanation: **Correct** - At p=0.5, the log-odds (logit) equals 0. Since g(θTx) = 0.5 means e^(θTx) = 1, therefore θTx = 0.
+
+Basic explanation (HS level): When probability is exactly 50-50, the log-odds is 0.","Explanation: **Incorrect** - The hyperplane is θTx = 0 (not 0.5). At the decision boundary, g(θTx) = 0.5 requires θTx = 0.
+
+Basic explanation (HS level): The threshold value (0.5) doesn't define the hyperplane; the equation θTx = 0 does.","Explanation: **Correct** - The decision boundary is linear in feature space. The equation θTx = 0 is a hyperplane (linear boundary).
+
+Basic explanation (HS level): Logistic regression creates straight-line (or hyperplane) decision boundaries.","Explanation: **Incorrect** - Non-linear feature transformations φ(x) change the decision boundary in the transformed space, though they remain linear in φ(x). The boundary in original space becomes nonlinear.
+
+Basic explanation (HS level): If you square age first, the boundary becomes curved in the original age space.","Explanation: **Correct** - By definition, the decision boundary is at g(θTx) = 0.5, so all points on it are assigned exactly 0.5 probability.
+
+Basic explanation (HS level): The decision boundary is defined as the set of points where probability equals 0.5.",
+2.4,MCQ,You train the model by maximizing the log-likelihood L(θ) of the historical health records. Which statements about the optimization and training process are true?,,"The log-likelihood function L(θ) is concave, ensuring that your gradient ascent will find the global best fit for the data.",The gradient of the log-likelihood is ∇L(θ) = Pm i=1(yi −g(θTxi))xi.,The model is prone to getting stuck in local optima if the initial health weights are poorly chosen.,The Newton-Raphson update step used for training can be interpreted as an Iteratively Reweighted Least Squares (IRLS) problem.,"The weight update depends only on whether the prediction was ""right or wrong"" (the sign), similar to the Perceptron algorithm.",,,"A, B, D","Explanation: **Correct** - The log-likelihood of logistic regression is a concave function. Concavity guarantees any local maximum is a global maximum, so gradient ascent finds the global optimum.
+
+Basic explanation (HS level): Concave (bowl-shape) means the highest point is always reachable and unique. No local traps.","Explanation: **Correct** - This is the gradient formula for logistic regression log-likelihood. It elegantly relates to the prediction error (yi - g(θTxi)).
+
+Basic explanation (HS level): The gradient is proportional to the error times the input feature.","Explanation: **Incorrect** - Due to concavity, logistic regression is NOT prone to local optima. It will always find the global optimum regardless of initialization.
+
+Basic explanation (HS level): Logistic regression is one of the nice algorithms - concavity means no local trap worries.","Explanation: **Correct** - The Newton-Raphson method for logistic regression can be viewed as Iteratively Reweighted Least Squares (IRLS), providing geometric interpretation.
+
+Basic explanation (HS level): IRLS is an elegant way to think about Newton's method for logistic regression.","Explanation: **Incorrect** - Logistic regression weights depend on probabilities p(y|x), not just sign. It's very different from the Perceptron which only cares about being right or wrong.
+
+Basic explanation (HS level): Logistic regression is continuous and probability-based, unlike Perceptron which only cares about sign.",
+2.5,MCQ,"Consider a simplified model with weights for Age (x1), Exposure (x2), and a Bias: θ = [1, 1, −2]T. The risk score is z = 1 · x1 + 1 · x2 −2. Which of the following are true?",,A resident with Age=1 and Exposure=1 lies exactly on the decision boundary.,A resident with Age=2 and Exposure=2 is assigned a risk probability p(y = 1|x) > 0.5.,A resident with Age=0 and Exposure=0 has a log-odd risk score of 0.,The equation of the risk decision boundary is x2 = −x1 + 2.,"If the bias term were changed to 0, a ""newborn"" (Age=0) with zero exposure would lie on the decision boundary.",,,"A, B, D, E","Explanation: **Correct** - With θ=[1,1,-2], z = 1(1) + 1(1) - 2 = 0. At z=0, g(0)=0.5 (boundary).
+
+Basic explanation (HS level): Plugging in: z = 1 + 1 - 2 = 0, which is exactly the boundary.","Explanation: **Correct** - At Age=2, Exposure=2: z = 2 + 2 - 2 = 2. g(2) = 1/(1+e^-2) ≈ 0.88 > 0.5.
+
+Basic explanation (HS level): z = 2, so sigmoid gives high probability > 0.5.","Explanation: **Correct** - At Age=0, Exposure=0: z = 0 + 0 - 2 = -2 (not 0). Log-odds = -2.
+
+Basic explanation (HS level): Everyone with zero characteristics has z = -2 (bias term).","Explanation: **Correct** - At boundary z=0: θTx=0 means 1·x1 + 1·x2 - 2 = 0, which rearranges to x2 = -x1 + 2.
+
+Basic explanation (HS level): Solving the boundary equation directly gives this line equation.","Explanation: **Correct** - With bias=0 and Age=0, Exposure=0: z = 0 + 0 + 0 = 0 (boundary condition).
+
+Basic explanation (HS level): Removing the bias term means z=0 when both features are zero.",
+3.1,MCQ,A prototype scanner is evaluated on a test set of N = 100 bags. The following confusion matrix summarizes the initial results: reference\hypothesis + − + − Which statements are correct based on this audit?,,FPR = 15,ACC = 75,TPR equals Recall and here TPR = 40,The negative predictive value is NPV = 35,The F1-score can be computed as F1 = 80,"Since the dataset is balanced (50 positives, 50 negatives), ACC must equal TPR",,"B, C, E","Explanation: **Incorrect** - FPR = FP/(FP+TN) = 15/(15+35) = 15/50 = 0.30, not 15. (A confuses rate with count.)
+
+Basic explanation (HS level): FPR should be a rate (proportion), not a count. 15 is the count, 0.3 is the rate.","Explanation: **Correct** - ACC = (TP+TN)/N = (40+35)/100 = 75/100 = 0.75 = 75%.
+
+Basic explanation (HS level): Accuracy is the proportion of correct predictions overall.","Explanation: **Correct** - TPR = TP/(TP+FN) = 40/50 = 0.80 = 80%. TPR equals Recall. The calculation matches.
+
+Basic explanation (HS level): True positive rate measures what fraction of actual positives we caught.","Explanation: **Incorrect** - NPV = TN/(TN+FN) = 35/(35+10) = 35/45 ≠ 35/50. (Wrong denominator.)
+
+Basic explanation (HS level): NPV denominator includes negatives we correctly identified and negatives we missed.","Explanation: **Correct** - F1 = 2·Precision·Recall/(Precision+Recall) = 2·(40/55)·(40/50)/((40/55)+(40/50)) = 80/105.
+
+Basic explanation (HS level): F1-score is the harmonic mean of precision and recall.","Explanation: **Incorrect** - ACC ≠ TPR always. With balanced data, ACC = (TP+TN)/N while TPR = TP/(TP+FN). These are different.
+
+Basic explanation (HS level): Even with balanced classes, accuracy and TPR measure different things."
+3.2,MCQ,"To communicate with the security staff, you must clarify the meaning of different metrics. Which of the following statements about metric relationships are true?",,The F-measure is the geometric mean of Recall and Precision.,The false positive rate (FPR) is the proportion of misclassified samples among all bags flagged by the system.,The true positive rate (TPR) is numerically equal to Recall and Sensitivity.,"If the scanner flags every single bag as a threat, then its Specificity equals 1.",The denominator of the negative predictive value (NPV) contains true negatives (TN) and false negatives (FN).,Specificity equals 1 −FPR.,,"C, E, F","Explanation: **Incorrect** - F-measure is the harmonic mean (not geometric mean) of Recall and Precision: F1 = 2·PR·Rec/(PR+Rec).
+
+Basic explanation (HS level): Harmonic mean vs geometric mean - the formula uses addition, not multiplication.","Explanation: **Incorrect** - FPR is the false positive rate among actual negatives: FPR = FP/(FP+TN). It's NOT about misclassification among flagged items.
+
+Basic explanation (HS level): FPR is about items that don't have the threat but were flagged, as a proportion of all actually safe items.","Explanation: **Correct** - TPR = TP/(TP+FN) and Recall = TP/(TP+FN). They are identical. Both measure sensitivity.
+
+Basic explanation (HS level): TPR and recall are the same metric - both measure successful detection rate.","Explanation: **Incorrect** - If every bag is flagged positive, TN=0 (no true negatives), so Specificity = TN/(TN+FP) = 0/(0+50) = 0, not 1.
+
+Basic explanation (HS level): If we flag everything, we catch all threats but also flag all safe items as dangerous.","Explanation: **Correct** - NPV = TN/(TN+FN). The denominator includes correct negative predictions and missed negatives.
+
+Basic explanation (HS level): NPV denominator is all the items predicted negative (both correct and incorrect).","Explanation: **Correct** - Specificity = TN/(TN+FP) = 1 - FP/(TN+FP) = 1 - FPR by definition.
+
+Basic explanation (HS level): One minus false positive rate equals specificity - perfect inverse relationship."
+3.3,MCQ,The scanner outputs a continuous confidence score s(x ). You consider lowering the threshold θ to make the system more sensitive to potential threats. Which statements are correct?,,The set of bags predicted as positive under a lower threshold is a superset of those predicted as positive under the original threshold.,The true positive rate can only increase or stay the same when lowering the threshold.,The false positive rate can only decrease or stay the same when lowering the threshold.,The specificity can only decrease or stay the same when lowering the threshold.,The ROC operating point moves up and to the left when lowering the threshold.,"Lowering the threshold must increase accuracy, regardless of the class distribution in the luggage.",,"A, B, D","Explanation: **Correct** - Lowering the threshold means more items are classified as positive, so the positive set expands (superset property).
+
+Basic explanation (HS level): Lower threshold = easier to be positive = more items classified positive = superset.","Explanation: **Correct** - When threshold lowers, we classify more items as positive, capturing more actual positives (TP increases or stays same).
+
+Basic explanation (HS level): Easier threshold = catch more true positives.","Explanation: **Incorrect** - When threshold lowers, we classify more items as positive, increasing FP (more false alarms). FPR increases, not decreases.
+
+Basic explanation (HS level): Lower threshold catches true positives but also catches more false positives.","Explanation: **Correct** - Specificity = TN/(TN+FP). When FP increases (more false positives), specificity decreases.
+
+Basic explanation (HS level): More false alarms = worse specificity (fewer true negatives relative to total negatives).","Explanation: **Incorrect** - ROC moves UP (higher TPR) and RIGHT (higher FPR) when lowering threshold, not up-and-left.
+
+Basic explanation (HS level): Lower threshold means more positives detected (up) but also more false alarms (right).","Explanation: **Incorrect** - Lowering threshold captures more positives but at the cost of more false positives. Accuracy might improve or worsen depending on class balance.
+
+Basic explanation (HS level): More detections doesn't always mean better overall accuracy."
+3.4,MCQ,You analyze the Receiver Operating Characteristic (ROC) behavior of the scanning software. Which statements are correct?,,"For a fixed threshold, the scanner corresponds to one point in the ROC plane, while varying θ yields an ROC curve.","The diagonal line from (0, 0) to (1, 1) represents random guessing and has AUC = 0.5.",AUC is the area under the ROC curve and summarizes performance over all possible threshold settings.,"If the proportion of bags containing prohibited items changes, the ROC curve must change.","Since the ROC curve is independent of the priors, it is also independent of the chosen threshold.","The point FPR = 0.5, TPR = 0.5 implies ACC = 0.5 for any class priors.",,"A, B, C, F","Explanation: **Correct** - Each threshold value gives one (FPR, TPR) point. Varying the threshold traces out the ROC curve.
+
+Basic explanation (HS level): ROC curve is traced by varying the decision threshold and plotting the resulting metrics.","Explanation: **Correct** - Random guessing (no discrimination) produces the diagonal line with AUC=0.5 (50% of the area under a unit square).
+
+Basic explanation (HS level): A random classifier performs at chance level, represented by the diagonal.","Explanation: **Correct** - AUC (Area Under Curve) integrates over all thresholds and represents the probability a random positive scores higher than random negative.
+
+Basic explanation (HS level): AUC is the summary statistic for overall ROC performance across all thresholds.","Explanation: **Incorrect** - ROC curves are threshold-independent and prior-independent. Changing class proportions doesn't change the ROC curve itself.
+
+Basic explanation (HS level): ROC curves show intrinsic algorithm performance independent of which class contains more items.","Explanation: **Incorrect** - ROC IS independent of threshold in the sense that the curve represents all thresholds. But the curve itself depends on the scores from the model.
+
+Basic explanation (HS level): The statement is contradictory - ROC curves exist precisely because we vary the threshold.","Explanation: **Correct** - At FPR=0.5, TPR=0.5, with any class priors, we can show ACC = 0.5. The point is on the chance diagonal.
+
+Basic explanation (HS level): A classifier with FPR=TPR=0.5 performs randomly, so accuracy is 0.5 regardless of prior."
+3.5,MCQ,"The scanner now classifies items into K specific categories (e.g., Electronics, Liquids, Sharp Objects). You examine the K-class confusion matrix [nij ]. Which statements are correct?",,"For class Ωκ, recallκ uses the row sum (total true instances of that item) in its denominator.","For class Ωκ, precisionκ uses the row sum in its denominator.","UAR is a weighted average of per-class recalls, where each class is weighted by its sample count.","If every entry in the matrix nij is doubled, the Recognition Rate (RR) changes because N has changed.","If you swap the roles of reference and hypothesis, the Recognition Rate stays unchanged.","If you swap the roles of reference and hypothesis, the roles of recallκ and precisionκ are exchanged.",,"A, E, F","Explanation: **Correct** - For class k, recall uses the row sum (total true instances of class k): recall_k = n_kk / Σ_j n_kj.
+
+Basic explanation (HS level): Recall for a class looks at that class's row in the confusion matrix.","Explanation: **Incorrect** - Precision uses column sum (items predicted as that class): precision_k = n_kk / Σ_i n_ik, NOT row sum.
+
+Basic explanation (HS level): Precision for a class looks at that class's column in the confusion matrix.","Explanation: **Incorrect** - UAR (Unweighted Average Recall) is NOT weighted by sample count. It's simply: UAR = (1/K) Σ recall_k.
+
+Basic explanation (HS level): UAR treats each class equally (unweighted). WAR (weighted) would use class counts.","Explanation: **Incorrect** - If all entries are doubled, RR = (Σ n_ii)/(Σ n_ij) = (2·Σ n_ii)/(2·Σ n_ij) = unchanged. The scaling cancels.
+
+Basic explanation (HS level): Recognition rate is a proportion, so scaling all entries equally doesn't change it.","Explanation: **Correct** - RR = (Σ correct predictions)/(total) is symmetric. Swapping reference/hypothesis doesn't change which diagonal elements are correct.
+
+Basic explanation (HS level): Recognition rate counts correct predictions on diagonal - doesn't matter which direction.","Explanation: **Correct** - Recall looks at rows, precision looks at columns. Swapping reference↔hypothesis swaps rows↔columns, exchanging recall and precision.
+
+Basic explanation (HS level): When you swap which axis is reference vs hypothesis, row and column swap, so recall and precision exchange."
+4.1,MCQ,"To begin your pipeline, you consider using rank-reduced LDA for dimensionality reduction. Which of the following statements are correct regarding this method?",,The method selects projection directions that maximize separation between class centroids.,The PCA step primarily reduces within-class variance by removing low-variance directions inside each class.,The method constructs a lower-dimensional discriminative subspace that preserves directions most relevant for class separability.,Rank-Reduced LDA can achieve higher classification accuracy than PCA even when PCA retains more variance.,The method selects directions that maximize overall variance.,,,"A, C, D","Explanation: **Correct** - Rank-reduced LDA maximizes between-class scatter (separation of centroids) relative to within-class scatter.
+
+Basic explanation (HS level): LDA picks directions that push class means apart while keeping each class tight.","Explanation: **Incorrect** - The PCA step in LDA (whitening/sphering) reduces overall variance, not specifically within-class variance.
+
+Basic explanation (HS level): PCA in LDA preprocessing is just for numerical stability, not targeting within-class variance.","Explanation: **Correct** - This is exactly what LDA does: creates a lower-dimensional space optimized for class separability.
+
+Basic explanation (HS level): LDA is designed to preserve directions that best separate your classes.","Explanation: **Correct** - LDA can outperform PCA in classification even when PCA retains more of the total variance, because LDA targets separability not variance.
+
+Basic explanation (HS level): More variance doesn't mean better for classification. LDA optimizes the right thing.","Explanation: **Incorrect** - LDA does NOT maximize overall variance. PCA does. LDA maximizes discriminative power (between/within class separation).
+
+Basic explanation (HS level): LDA ignores overall variance and focuses only on what helps classify.",
+4.2,MCQ,Your colleague suggests using standard PCA instead of LDA to differentiate the tissue types. Which of the following statements about PCA and LDA are correct in this context?,,PCA is supervised and thus naturally identifies tissue categories.,LDA uses class labels (tissue types) to guide the transformation.,PCA maximizes class separability by default.,LDA maximizes between-class variance relative to within-class variance.,PCA guarantees optimal classification for your diagnostic tool.,,,"B, D","Explanation: **Incorrect** - PCA is unsupervised (doesn't use labels). It just finds high-variance directions regardless of class.
+
+Basic explanation (HS level): PCA doesn't know anything about tissue types - it just finds the most variable directions.","Explanation: **Correct** - LDA is supervised and explicitly uses tissue type labels to guide the transformation toward class separability.
+
+Basic explanation (HS level): LDA uses the class labels to optimize separation.","Explanation: **Incorrect** - PCA maximizes variance, NOT class separability. High-variance directions might not separate classes well.
+
+Basic explanation (HS level): The most variable direction might run parallel to a class boundary, not separating classes.","Explanation: **Correct** - This is the definition of LDA: maximize the ratio of between-class to within-class variance.
+
+Basic explanation (HS level): LDA's objective is to maximize this separation ratio.","Explanation: **Incorrect** - PCA does not guarantee optimal classification. It only preserves variance, which may not separate classes.
+
+Basic explanation (HS level): PCA is dimensionality reduction, not classification optimization.",
+4.3,MCQ,"To handle the varying scales of different biopsy markers, you apply the LDA sphering transform: ϕ(x) = D−1/2U Tx This step is designed primarily to achieve which of the following?",,Transform class-conditional covariance matrices so that all classes share the identity covariance matrix.,Remove correlations among features to simplify distance-based classification.,Maximize between-class scatter relative to within-class scatter.,Guarantee dimensionality reduction without losing discriminative information.,Ensure class means become orthogonal in transformed space.,,,"A, B","Explanation: **Correct** - The sphering transform decorrelates and rescales so all classes have the identity covariance I in the transformed space.
+
+Basic explanation (HS level): After sphering, each class has covariance = identity matrix (uncorrelated, unit variance).","Explanation: **Correct** - Sphering removes correlations (diagonalizes covariance) and normalizes scales, simplifying distance-based decisions.
+
+Basic explanation (HS level): Decorrelated features make Euclidean distance meaningful.","Explanation: **Incorrect** - Sphering is preprocessing; it doesn't maximize between/within-class scatter. LDA does that.
+
+Basic explanation (HS level): Sphering just prepares the data; LDA uses sphered data to maximize separability.","Explanation: **Incorrect** - Sphering alone doesn't guarantee dimensionality reduction. The actual reduction comes from selecting top LDA components.
+
+Basic explanation (HS level): Sphering maintains dimensionality; dimension selection happens separately.","Explanation: **Incorrect** - Sphering does not make class means orthogonal. It orthogonalizes features within each class.
+
+Basic explanation (HS level): Sphering affects feature correlation, not the geometric relationship between class means.",
+4.4,MCQ,"When choosing a distance metric to determine the final tissue diagnosis, which of the following geometric interpretations are correct?",,The Mahalanobis distance can be interpreted as measuring Euclidean distance in a transformed space where feature correlations and unequal variances have been normalized.,"Projecting data onto directions of maximum variance (PCA) always improves classification, because higher-variance directions contain more discriminative information.","If all class-conditional covariance matrices and class prior probabilities are identical, the Bayes-optimal Gaussian classifier reduces to a nearest-mean decision rule under the Mahalanobis distance.","If all class-conditional covariance matrices and class prior probabilities are identical, the Bayes-optimal Gaussian classifier reduces to a nearest-mean decision rule under the Euclidean distance.","High-variance directions selected by PCA can capture within-class variation instead of class separation, which may lead to greater overlap between classes after projection.",,,"A, C, E","Explanation: **Correct** - Mahalanobis distance accounts for correlation and variance by transforming to a space where Euclidean distance works properly.
+
+Basic explanation (HS level): Mahalanobis = Euclidean after deforming the space to handle correlations and different variances.","Explanation: **Incorrect** - PCA preserves high variance but doesn't guarantee classification improvement. High-variance directions may not separate classes.
+
+Basic explanation (HS level): Variance-preserving isn't classification-optimal. Within-class variation counts too.","Explanation: **Correct** - If covariances and priors are identical for all classes, Bayes classifier reduces to nearest-mean with Mahalanobis distance.
+
+Basic explanation (HS level): When classes are equally distributed, you just pick the closest class center using Mahalanobis distance.","Explanation: **Incorrect** - With Euclidean distance instead, the decision rule would be different. Euclidean works when covariance is proportional to identity.
+
+Basic explanation (HS level): Euclidean is a special case of Mahalanobis when covariance = I.","Explanation: **Correct** - PCA's high-variance directions can capture within-class variation rather than class separation, leading to worse classification.
+
+Basic explanation (HS level): A high-variance direction perpendicular to class separation is bad for classification.",
+4.5,MCQ,"Finally, you evaluate the full LDA model with a shared covariance Σ and the sphered transform ϕ(x). Which of the following technical details are correct for your final implementation?",,"After applying ϕ, all classes share the identity covariance matrix. In this space, the LDA decision rule with equal priors is equivalent to nearest-centroid classification using L1 distance.",The sphering transform ϕ inherently performs rank reduction from Rd to RK−1 because the between- class scatter matrix has rank at most K −1.,"In rank-reduced LDA, the projection matrix Φ is obtained by solving a generalized eigenvalue problem and the resulting discriminant subspace has dimension at most K −1, regardless of the original feature dimension d.","After sphering the data, the LDA decision rule involves squared Euclidean distances and therefore yields quadratic decision boundaries in the transformed feature space.","The Fisher Transform viewpoint shows that maximizing the Rayleigh quotient J(r) = r⊤SBr r⊤SW r leads to the same linear boundaries as LDA. For the two-class case, the optimal direction satisfies r∗∝ S −1 W (µ1 −µ2).",,,"C, E","Explanation: **Incorrect** - After sphering all classes share identity covariance, so nearest-centroid uses Euclidean distance (L2), not L1 distance.
+
+Basic explanation (HS level): With identity covariance, Euclidean (L2) distance is optimal, not Manhattan (L1).","Explanation: **Correct** - The between-class scatter matrix has rank at most K-1 (K classes), so the sphered LDA subspace is at most (K-1)-dimensional.
+
+Basic explanation (HS level): With K classes, you can have at most K-1 independent directions to distinguish them.","Explanation: **Correct** - Rank-reduced LDA projects from R^d to R^(K-1), creating a (K-1)-dimensional discriminant subspace regardless of original dimensionality d.
+
+Basic explanation (HS level): LDA always reduces to at most K-1 dimensions for K classes, no matter how many original features.","Explanation: **Incorrect** - After sphering, LDA decision boundaries are linear (not quadratic) in the transformed space because covariances are identical.
+
+Basic explanation (HS level): Same covariance = linear boundaries. Quadratic would require different covariances.","Explanation: **Correct** - Fisher criterion (maximizing Rayleigh quotient) yields the same LDA directions. For 2-class case, optimum: r* ∝ S_W^{-1}(μ_1-μ_2).
+
+Basic explanation (HS level): Fisher formulation gives the same solution as LDA's eigenvalue approach.",
+5.1.1,MCQ,1. Step 1: Standard Form. Optimization literature typically defines the Lagrangian for inequality constraints in the form fi(x) ≤0. Which inequality represents the constraint f1(x) = x1 + x2 ≥4 in this standard form?,,x1 + x2 −4 ≤0,4 −x1 −x2 ≤0,x1 + x2 −4 = 0,−(x1 + x2) ≤−4,x1 ≥4 −x2,,,B,"Explanation: **Incorrect** - Standard form requires f(x) ≤ 0. x1 + x2 ≥ 4 becomes -(x1+x2) ≤ -4 or 4-x1-x2 ≤ 0, not x1+x2-4 ≤ 0.
+
+Basic explanation (HS level): Flip both sides: multiply by -1 to get ≤ 0 form.","Explanation: **Correct** - 4 - x1 - x2 ≤ 0 is equivalent to x1 + x2 ≥ 4 (standard inequality form for Lagrangian).
+
+Basic explanation (HS level): This is the standard form used in optimization literature.","Explanation: **Incorrect** - Equality constraints use different form. The question asks for inequality in standard form.
+
+Basic explanation (HS level): Equality is for Lagrange multipliers, not needed here.","Explanation: **Incorrect** - -(x1+x2) ≤ -4 is equivalent but not typically written this way. 4-x1-x2 ≤ 0 is cleaner.
+
+Basic explanation (HS level): While mathematically equivalent, the form in option B is preferred.","Explanation: **Incorrect** - This is not in standard inequality form. It's still an inequality but not f(x) ≤ 0.
+
+Basic explanation (HS level): Not the standard form for Lagrangian.",
+5.1.2,MCQ,"2. Step 2: The Lagrangian. Based on the standard form f1(x) ≤0 identified above, what is the correct Lagrangian function L(x, λ)?",,"L(x, λ) = 1 2(x 2 1 + x 2 2 ) −λ(x1 + x2 −4)","L(x, λ) = 1 2(x 2 1 + x 2 2 ) + λ(4 −x1 −x2)","L(x, λ) = (x 2 1 + x 2 2 ) + λ(4 −x1 −x2)","L(x, λ) = 1 2(x 2 1 + x 2 2 ) + λ(x1 + x2 −4)2","L(x, λ) = 1 2(x 2 1 + x 2 2 ) + P2 i=1 λi(4 −xi)",,,B,"Explanation: **Incorrect** - The Lagrangian should be L(x,λ) = (1/2)(x1²+x2²) - λ(x1+x2-4) with minus sign for ≥ constraint.
+
+Basic explanation (HS level): Standard Lagrangian with constraint in form 4-x1-x2 ≤ 0 becomes L = f(x) - λ(constraint).","Explanation: **Correct** - L(x,λ) = (1/2)(x1²+x2²) + λ(4-x1-x2). With f1(x)=4-x1-x2 ≤ 0, we add λ·f1(x).
+
+Basic explanation (HS level): Lagrangian = objective + λ×constraint (when constraint ≤ 0).","Explanation: **Incorrect** - Missing the 1/2 factor on the objective term. Should be (1/2)(objective), not full.
+
+Basic explanation (HS level): The original objective has 1/2, which must be preserved.","Explanation: **Incorrect** - The constraint term is not squared. Lagrangian is linear in constraints, not quadratic.
+
+Basic explanation (HS level): Lagrangian adds constraints linearly, not squared.","Explanation: **Incorrect** - Should be λ(4-x1-x2), not sum of separate λ_i. Single constraint means single λ.
+
+Basic explanation (HS level): Only one constraint, so only one multiplier λ.",
+5.1.3,MCQ,"3. Step 3: Minimization w.r.t Primal Variables. To calculate the dual function g(λ) = infx L(x, λ), we minimize L with respect to x by setting the gradient ∇xL to zero. What is the resulting relationship between x and λ?",,"x1 = 0, x2 = 0","x1 = −λ, x2 = −λ","x1 = λ, x2 = λ",x1 = 4 −x2,∇xL = 2x −λ = 0 =⇒x = λ/2,,,C,"Explanation: **Incorrect** - ∇_x L = x (not 0) because L involves x². Setting gradient to zero gives x ≠ 0.
+
+Basic explanation (HS level): The objective x1²+x2² has nonzero gradient unless x=0.","Explanation: **Incorrect** - ∇_x L = [2x1-λ, 2x2-λ]. Setting to zero: 2x1=λ, 2x2=λ means x1=x2=λ/2 (not -λ).
+
+Basic explanation (HS level): Dividing by 2 gives λ/2, not -λ.","Explanation: **Correct** - ∇_x L = [2x1-λ, 2x2-λ] = 0 gives 2x1=λ and 2x2=λ, so x1=x2=λ/2, thus x1=λ and x2=λ only at λ/2.
+
+Basic explanation (HS level): Wait, let me recalculate: if 2x_i = λ, then x_i = λ/2. But the answer says x_1=λ, x_2=λ. Let me check the constraint: wait, the Lagrangian from B is L = 1/2(x1²+x2²) + λ(4-x1-x2). Then ∇L = [x1-λ, x2-λ] = 0, giving x1=λ, x2=λ. That's correct!","Explanation: **Incorrect** - x1 = 4-x2 is a constraint relationship, not the result of setting gradients to zero.
+
+Basic explanation (HS level): This describes the constraint, not the optimization result.","Explanation: **Incorrect** - This is the calculation shown but not the final answer. It shows the intermediate: 2x = λ, not x = λ.
+
+Basic explanation (HS level): The intermediate step, not the answer.",
+5.1.4,MCQ,"4. Step 4: The Dual Function. By substituting the optimal x expressions back into the Lagrangian, we obtain the dual function g(λ). Which of the following is the correct expression?",,g(λ) = λ2 −4λ,g(λ) = 4λ −λ2,g(λ) = 4λ −2λ2,g(λ) = 2λ2 + 4,g(λ) = −1 2λ2 + 4λ,,,B,"Explanation: **Incorrect** - With x=λ from step 3, L(x,λ) = 1/2(λ²+λ²) + λ(4-λ-λ) = λ² + 4λ - 2λ² = 4λ - λ².
+
+Basic explanation (HS level): Substitute x=λ: (1/2)(2λ²) + λ(4-2λ) = λ² + 4λ - 2λ² = 4λ - λ².","Explanation: **Correct** - g(λ) = 4λ - λ². This is the dual function: objective value when x is optimized for given λ.
+
+Basic explanation (HS level): Dual function after substitution and simplification.","Explanation: **Incorrect** - 4λ - 2λ² is wrong. Check: (1/2)(λ²+λ²) + λ(4-λ-λ) = λ² + 4λ - 2λ² = -λ² + 4λ, not this.
+
+Basic explanation (HS level): Incorrect algebra.","Explanation: **Incorrect** - This is positive quadratic; the dual function should be downward-opening.
+
+Basic explanation (HS level): The correct function is -λ² + 4λ, opening downward.","Explanation: **Incorrect** - -(1/2)λ² + 4λ has coefficient -1/2, but correct is -1. The algebra doesn't match.
+
+Basic explanation (HS level): The coefficient of λ² should be -1, not -1/2.",
+6.1,MCQ,"As you structure the latent variables for your seismic model, you evaluate how the model handles unobserved assignments. Which of the following statements are incorrect? (Select all that apply.)",,The Observed-data log likelihood is guaranteed to increase whenever the responsibilities are updated.,"If the latent variables Z (the specific seismic source) were observed, maximum likelihood estimation would reduce to fitting independent Gaussian distributions to disjoint subsets of the data.","The Observed-data log likelihood is Convex in the mixture parameters, since it is obtained by marginalizing over the latent variables.","Knowing the values of the latent variables removes the need for the EM algorithm, because the resulting maximum likelihood problem admits a closed-form solution.","When component assignments are treated as known, the log-likelihood separates into independent terms for each component, whereas when assignments are unknown, the log-likelihood involves a log of a sum over components.",,,"A, C","Explanation: **Incorrect** - STATEMENT IS INCORRECT (as listed in the question asking for incorrect). The observed log-likelihood can decrease if responsibilities change poorly, or may not increase monotonically in early iterations.
+
+Basic explanation (HS level): EM guarantees non-decrease of likelihood, but this must be worded carefully about which likelihood.","Explanation: **Correct** - If Z were known, we'd maximize likelihood per component independently, each as Gaussian fit to a subset.
+
+Basic explanation (HS level): Unknown variables are what make EM necessary; knowing them splits into simpler problems.","Explanation: **INCORRECT STATEMENT** - The observed-data log-likelihood is NOT convex (it's concave at best). Marginalization over latent variables makes it non-convex.
+
+Basic explanation (HS level): The likelihood over latent variables is often multimodal and non-convex.","Explanation: **Correct (about why EM is needed)** - Known latent variables enable closed-form solution. That's why EM exists.
+
+Basic explanation (HS level): EM alternates because hidden variables require it. Knowing them eliminates the need.","Explanation: **Correct** - Log-likelihood separates into sum vs log-of-sum depending on whether assignments are known.
+
+Basic explanation (HS level): This is the fundamental reason EM is needed.",
+6.2,MCQ,"To quantify the probability that a specific tremor belongs to ""Volcanic Activity"" versus ""Tectonic Shift,"" you calculate the responsibilities γ(znk). Which of the following statements are correct? (Select all that apply.)",,Responsibilities are posterior probabilities of latent variables.,Responsibilities sum to one over mixture components for each data point.,Responsibilities correspond to hard cluster assignments (each tremor is assigned to exactly one source).,"Responsibilities depend on current parameter estimates (πk, µk, Σk).",Responsibilities are optimized in the M-step of the algorithm.,,,"A, B, D","Explanation: **Correct** - Responsibilities γ(z_nk) = p(z_n=k|x_n,θ) are posterior probabilities of latent component assignments.
+
+Basic explanation (HS level): Responsibilities are how much each component explains each data point.","Explanation: **Correct** - For each data point n, Σ_k γ(z_nk) = 1 (probabilities sum to one).
+
+Basic explanation (HS level): Each point is 100% assigned across all components.","Explanation: **INCORRECT** - Responsibilities are soft assignments (probabilities), not hard (0 or 1). That's the whole point of EM.
+
+Basic explanation (HS level): EM uses soft assignments via responsibilities, not hard clustering.","Explanation: **Correct** - Responsibilities depend on parameters: γ(z_nk) ∝ π_k N(x_n|μ_k,Σ_k).
+
+Basic explanation (HS level): Responsibilities computed from current parameter estimates.","Explanation: **INCORRECT STATEMENT** - Responsibilities are updated in E-step, not M-step. M-step updates parameters.
+
+Basic explanation (HS level): E = expectation (compute responsibilities), M = maximization (update parameters).",
+6.3,MCQ,"While training your seismic model, you monitor the convergence of the EM algorithm. Which of the following statements are true about the algorithm’s behavior? (Select all that apply.)",,"The choice of initial values for the seismic component parameters (e.g., initial mean vibration frequency) affects the final estimates.",The EM algorithm is guaranteed to converge.,The EM algorithm is guaranteed to converge to the global maximum of the likelihood.,The parameter estimates obtained at convergence are guaranteed to be the global Maximum Likelihood Estimates.,,,,"A, B","Explanation: **Correct** - Initial parameter values affect which local maximum EM converges to (if non-convex).
+
+Basic explanation (HS level): EM converges to a stationary point; initialization determines which one.","Explanation: **Correct** - EM is guaranteed to find a fixed point (but not necessarily global maximum).
+
+Basic explanation (HS level): EM always converges due to the EM theorem and monotone increasing likelihood.","Explanation: **INCORRECT** - EM guaranteed converges to a fixed point, but NOT to the global maximum. May converge to local maximum.
+
+Basic explanation (HS level): Convergence guaranteed, but to which optimum is not guaranteed.","Explanation: **INCORRECT** - Parameter estimates at convergence are the maximum likelihood estimates for that fixed point, but not necessarily global MLE.
+
+Basic explanation (HS level): Could be local maximum, not guaranteed global MLE.",,
+6.4,MCQ,You consider incorporating historical geological data as a prior distribution p(θ) using Maximum A Posteriori (MAP) estimation. Which of the following statements regarding MLE and MAP are correct?,,"The MLE depends only on the likelihood function, whereas the MAP estimator additionally depends on the prior distribution p(θ).","If your prior for seismic activity is uniform, the MAP estimator becomes identical to the MLE.",MAP estimation can be formulated as maximizing the sum of the log-likelihood and the log-prior.,"Because the MAP estimator utilizes prior geological knowledge, it is mathematically guaranteed to always provide a better estimate of the true parameters than MLE.","For a massive dataset of seismic records, the influence of the prior on the MAP estimator necessarily disappears, regardless of the choice of prior.",,,"A, B, C","Explanation: **Correct** - MLE depends only on data and likelihood; MAP adds the prior p(θ).
+
+Basic explanation (HS level): MLE: maximize likelihood only. MAP: maximize likelihood×prior.","Explanation: **Correct** - If prior is uniform (constant), it factors out: argmax p(θ|data) ∝ argmax L(θ), so MAP = MLE.
+
+Basic explanation (HS level): Uniform prior doesn't affect the maximization.","Explanation: **Correct** - MAP ≡ maximize log-likelihood + log-prior. Can be written as sum in log-space.
+
+Basic explanation (HS level): Log of product = sum of logs.","Explanation: **INCORRECT** - MAP using domain knowledge may be better or worse;not guaranteed. Depends on prior accuracy.
+
+Basic explanation (HS level): A bad prior can hurt compared to MLE.","Explanation: **Correct** - With infinite data, likelihood dominates the prior (likelihood grows, prior is fixed). MAP → MLE.
+
+Basic explanation (HS level): Large datasets overwhelm prior influence by law of large numbers.",
+6.5,MCQ,"Your model occasionally produces errors where a component ""collapses."" Which of the following technical statements are correct regarding the refinement of your GMM? Select all that apply.",,The EM algorithm directly optimizes seismic classification accuracy during the training process.,"During the EM algorithm, the expected complete-data log-likelihood is maximized with respect to the model parameters while keeping the responsibilities fixed.",A fixed point of the EM algorithm may correspond to a saddle point of the observed-data log-likelihood rather than a strict local maximum.,The EM algorithm can converge to degenerate solutions in which a component collapses onto a single seismic event with a vanishing covariance matrix.,A GMM trained via EM performs density estimation; identifying a specific tremor’s source requires an additional decision rule based on posterior probabilities.,,,"B, C, D, E","Explanation: **INCORRECT** - EM maximizes likelihood, not classification accuracy. These can be different objectives.
+
+Basic explanation (HS level): EM doesn't directly optimize for getting predictions right.","Explanation: **Correct** - This is the M-step definition: maximize expected complete-data log-likelihood given fixed responsibilities.
+
+Basic explanation (HS level): E-step: compute responsibilities. M-step: optimize given responsibilities.","Explanation: **Correct** - EM fixed points can be saddle points or local maxima, not guaranteed true local maxima.
+
+Basic explanation (HS level): Convergence means stationary point, which includes saddle points.","Explanation: **Correct** - EM can converge with a component collapsed to a point (vanishing covariance), which is degenerate.
+
+Basic explanation (HS level): Component collapse is a known EM issue requiring regularization.","Explanation: **Correct** - GMM via EM does density estimation; additional decision rule needed to assign sources to tremors.
+
+Basic explanation (HS level): EM learns the model; classification requires threshold/decision rule.",

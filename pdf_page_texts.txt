@@ -1,0 +1,724 @@
+===== PAGE 1 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+Pattern Recognition Mock Exam
+Full Name
+Matriculation Number
+Course of Studies
+I have read all the information below and entered required data truthfully:
+Signature
+• You have 90 minutes to finish the exam.
+• All questions are single or multiple choice. For each multiple-choice question, one or
+more than one option could be correct.
+• This exam does not include negative points. The minimum points you can get from
+a question is zero. You need to choose all correct options to get full grade points.
+Choosing any incorrect option will be penalized.
+• Only the answers marked on the answer sheet will be evaluated. You can use this
+question sheet’s space to write down any calculation or note you want for your own
+analysis. Nothing that you write in this question sheet will be considered. The final
+grade is evaluated solely based on your answer sheet.
+• You are not allowed to answer with a pencil.
+• You are not allowed to use any electronic auxiliaries including calculators.
+• You are allowed to use exactly one handwritten DinA4 sheet of notes. (Back and
+front, photocopies are not allowed.)
+I have read all the information above and entered required data truthfully:
+Signature
+PLEASE WRITE ANSWERS ON THE ANSWER SHEET!
+Section
+1
+2
+3
+4
+5
+6
+7
+Sum
+Points
+6
+8
+8
+8
+8
+6
+8
+52
+1
+
+
+===== PAGE 2 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+Answersheet Guideline
+1. Mark your answers clear in the designated spaces.
+2. Only pens are allowed for filling in answers in answer sheets. Do not use pencils, highlighters, or
+correction fluid.
+3. The correct method for marking answers is shown in Figure 1. Only use a cross-mark on the answer
+sheet to indicate your choice. If you cannot correct your answer further in the exam, request a new
+answer sheet.
+4. The exam will be graded automatically. Ensure that your markings are clear and confined within the
+designated spaces.
+A
+1.
+B
+C
+D
+Cross check the answer
+A
+1.
+B
+C
+D
+These examples are all wrong. 
+Only cross check is accepted
+A
+1.
+B
+C
+D
+Example: in case you have initially 
+chosen "A" but you decided to change 
+your answer from "A" to "C"
+A
+1.
+B
+C
+D
+This is also wrong.
+In case you initially chose "A" but 
+then decided to cancel "A", so you 
+filled it. But then again you decided 
+to choose "A", in this case you should
+ask for a new answer sheet
+Figure 1: Instructions on the correct and wrong behavior of cross-check in answer sheet.
+2
+
+
+===== PAGE 3 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+1 Introduction
+Question 1.1
+1 P.
+We discussed the 6 fundamental postulates of pattern recognition. Postulate 6 states “Similarity through
+feature space proximity”. Which of the following statements best describes this postulate? (SC)
+□A. Two patterns are similar if their features differ only lightly. This implies that small differences in the
+input features should not change the classification drastically.
+□B. Patterns belonging to the same class form a compact group in the feature space, meaning their features
+are similar to each other.
+□C. A pattern consists of simpler constituents which have certain relations to each other and can be
+decomposed into these constituents.
+□D. A complex pattern has a certain structure, meaning that not any arrangement of simpler constituents
+is a valid pattern.
+Solution 1.1
+A
+B describes Postulate 3 (“Compactness and separability”).
+C describes Postulate 4 (“Decomposability”).
+D describes Postulate 5 (“Structural constraints”)
+Question 1.2
+1 P.
+Why is convexity an important property in optimization problems? (SC)
+□A. It guarantees that the problem has a closed-form analytical solution, eliminating the need for iterative
+algorithms like Gradient Descent.
+□B. It ensures that any local minimum is also a global minimum, preventing the optimization algorithm
+from getting stuck in local optima.
+□C. It implies that the objective function is linear, which ensures that the computational complexity of
+the optimization is always linear.
+□D. It ensures that the Hessian matrix is always indefinite, allowing the algorithm to escape saddle points
+more efficiently.
+Solution 1.2
+B
+Question 1.3
+4 P.
+State which of the 4 following statements are true for discriminative and/or generative models: (MC)
+3
+
+
+===== PAGE 4 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+1. Discriminative
+2. Generative
+A. It directly models the decision boundary:
+□
+□
+B. It can classify an input feature vector:
+□
+□
+C. It models class distributions:
+□
+□
+D. It can be trained with training data:
+□
+□
+Solution 1.3
+1. Discriminative model
+2. Discriminative and Generative model
+3. Generative model
+4. Discriminative and Generative model
+4
+
+
+===== PAGE 5 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+2 Logistic Regression
+You are a data analyst for a municipal health agency. To better allocate medical resources, you are building
+a model to predict the probability that a resident will contract a seasonal respiratory illness (y = 1) based
+on factors like age, air quality index, and vaccination status (x). You have chosen Logistic Regression
+because of its ability to provide interpretable, calibrated probabilities. (8 P.) )
+Question 2.1
+1 P.
+As you explain the model choice to the Health Commissioner, which of the following statements correctly
+describe the fundamental properties of your Logistic Regression model?
+□A. It is a generative model that estimates the joint density p(x, y) of the population’s health data before
+applying Bayes’ rule.
+□B. It is a discriminative model that directly estimates the risk p(y|x) without modeling how environmental
+features p(x|y) are distributed.
+□C. Unlike a simple Perceptron, it outputs a calibrated probability value between 0 and 1, allowing for
+nuanced risk tiers.
+□D. It requires the assumption that the feature distributions for healthy and ill residents are Gaussian
+with equal covariance matrices.
+□E. It is solved using a closed-form analytical solution, making training instantaneous once the data is
+collected.
+Solution 2.1
+B, C
+Question 2.2
+1 P.
+To map health scores to probabilities, you use the logistic sigmoid function g(z) =
+1
+1+e−z . Which of the
+following mathematical properties of this ”risk curve” are valid?
+□A. The function satisfies the symmetry relation g(−z) = −g(z).
+□B. The sensitivity (derivative) can be expressed using the risk value itself: g′(z) = g(z)(1 −g(z)).
+□C. The function maps any real-valued health score strictly monotonically to a probability in (0, 1).
+□D. At a neutral score of 0, the predicted risk is g(0) = 0.
+□E. The function satisfies the symmetry relation g(−z) = 1 −g(z).
+Solution 2.2
+B, C, E
+5
+
+
+===== PAGE 6 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+Question 2.3
+2 P.
+You define a ”High Risk” alert when p(y = 1|x) ≥0.5. Which statements regarding the geometric boundary
+between ”At Risk” and ”Safe” zones are correct?
+□A. The decision boundary is the set of points where the log-odds (logit) of falling ill equal 0.
+□B. The decision boundary is defined by the hyperplane θTx = 0.5.
+□C. The decision boundary is linear in the feature space defined by x.
+□D. If we use non-linear transformations ϕ(x) (e.g., squaring the age), the decision boundary must still be
+linear in the original input space.
+□E. Residents lying exactly on the decision boundary have a predicted risk probability of 0.5.
+Solution 2.3
+A, C, E
+Question 2.4
+2 P.
+You train the model by maximizing the log-likelihood L(θ) of the historical health records. Which statements
+about the optimization and training process are true?
+□A. The log-likelihood function L(θ) is concave, ensuring that your gradient ascent will find the global
+best fit for the data.
+□B. The gradient of the log-likelihood is ∇L(θ) = Pm
+i=1(yi −g(θTxi))xi.
+□C. The model is prone to getting stuck in local optima if the initial health weights are poorly chosen.
+□D. The Newton-Raphson update step used for training can be interpreted as an Iteratively Reweighted
+Least Squares (IRLS) problem.
+□E. The weight update depends only on whether the prediction was ”right or wrong” (the sign), similar to
+the Perceptron algorithm.
+Solution 2.4
+A, B, D
+Question 2.5
+2 P.
+Consider a simplified model with weights for Age (x1), Exposure (x2), and a Bias: θ = [1, 1, −2]T. The risk
+score is z = 1 · x1 + 1 · x2 −2. Which of the following are true?
+□A. A resident with Age=1 and Exposure=1 lies exactly on the decision boundary.
+□B. A resident with Age=2 and Exposure=2 is assigned a risk probability p(y = 1|x) > 0.5.
+□C. A resident with Age=0 and Exposure=0 has a log-odd risk score of 0.
+□D. The equation of the risk decision boundary is x2 = −x1 + 2.
+□E. If the bias term were changed to 0, a ”newborn” (Age=0) with zero exposure would lie on the decision
+boundary.
+6
+
+
+===== PAGE 7 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+Solution 2.5
+A, B, D, E
+7
+
+
+===== PAGE 8 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+3 Evaluation
+You are lead systems engineer for an airport security project. Your team is testing a new AI-based x-ray
+scanner designed to detect prohibited items (Positive class) in passenger luggage. To ensure the safety of the
+airport while minimizing delays for passengers, you must rigorously evaluate your classifier using confusion
+matrices, ROC curves, and multi-class metrics for different types of prohibited items. (8 P.)
+Question 3.1
+1 P.
+A prototype scanner is evaluated on a test set of N = 100 bags. The following confusion matrix summarizes
+the initial results:
+reference\hypothesis
++
+−
++
+40
+10
+50
+−
+15
+35
+50
+55
+45
+100
+Which statements are correct based on this audit?
+□A. FPR = 15
+55
+□B. ACC = 75
+100
+□C. TPR equals Recall and here TPR = 40
+50
+□D. The negative predictive value is NPV = 35
+50
+□E. The F1-score can be computed as F1 = 80
+105
+□F. Since the dataset is balanced (50 positives, 50 negatives), ACC must equal TPR
+Solution 3.1
+B, C, E
+Question 3.2
+1 P.
+To communicate with the security staff, you must clarify the meaning of different metrics. Which of the
+following statements about metric relationships are true?
+□A. The F-measure is the geometric mean of Recall and Precision.
+□B. The false positive rate (FPR) is the proportion of misclassified samples among all bags flagged by the
+system.
+□C. The true positive rate (TPR) is numerically equal to Recall and Sensitivity.
+□D. If the scanner flags every single bag as a threat, then its Specificity equals 1.
+8
+
+
+===== PAGE 9 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+□E. The denominator of the negative predictive value (NPV) contains true negatives (TN) and false
+negatives (FN).
+□F. Specificity equals 1 −FPR.
+Solution 3.2
+C, E, F
+Question 3.3
+2 P.
+The scanner outputs a continuous confidence score s(x ). You consider lowering the threshold θ to make the
+system more sensitive to potential threats. Which statements are correct?
+□A. The set of bags predicted as positive under a lower threshold is a superset of those predicted as positive
+under the original threshold.
+□B. The true positive rate can only increase or stay the same when lowering the threshold.
+□C. The false positive rate can only decrease or stay the same when lowering the threshold.
+□D. The specificity can only decrease or stay the same when lowering the threshold.
+□E. The ROC operating point moves up and to the left when lowering the threshold.
+□F. Lowering the threshold must increase accuracy, regardless of the class distribution in the luggage.
+Solution 3.3
+A, B, D
+Question 3.4
+2 P.
+You analyze the Receiver Operating Characteristic (ROC) behavior of the scanning software.
+Which
+statements are correct?
+□A. For a fixed threshold, the scanner corresponds to one point in the ROC plane, while varying θ yields
+an ROC curve.
+□B. The diagonal line from (0, 0) to (1, 1) represents random guessing and has AUC = 0.5.
+□C. AUC is the area under the ROC curve and summarizes performance over all possible threshold settings.
+□D. If the proportion of bags containing prohibited items changes, the ROC curve must change.
+□E. Since the ROC curve is independent of the priors, it is also independent of the chosen threshold.
+□F. The point FPR = 0.5, TPR = 0.5 implies ACC = 0.5 for any class priors.
+9
+
+
+===== PAGE 10 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+Solution 3.4
+A, B, C, F
+Question 3.5
+2 P.
+The scanner now classifies items into K specific categories (e.g., Electronics, Liquids, Sharp Objects). You
+examine the K-class confusion matrix [nij ]. Which statements are correct?
+□A. For class Ωκ, recallκ uses the row sum (total true instances of that item) in its denominator.
+□B. For class Ωκ, precisionκ uses the row sum in its denominator.
+□C. UAR is a weighted average of per-class recalls, where each class is weighted by its sample count.
+□D. If every entry in the matrix nij is doubled, the Recognition Rate (RR) changes because N has changed.
+□E. If you swap the roles of reference and hypothesis, the Recognition Rate stays unchanged.
+□F. If you swap the roles of reference and hypothesis, the roles of recallκ and precisionκ are exchanged.
+Solution 3.5
+A, E, F
+10
+
+
+===== PAGE 11 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+4 Feature Transforms
+You are a Lead Data Scientist at a medical research facility developing an automated system to classify
+K different tissue types from high-dimensional biopsy scans. The raw data consists of thousands of
+features, many of which are redundant or highly correlated. To ensure the diagnostic tool is both accurate
+and computationally efficient, you must design a pipeline using Linear Discriminant Analysis (LDA) and
+Principal Component Analysis (PCA). (8 P.)
+Question 4.1
+1 P.
+To begin your pipeline, you consider using rank-reduced LDA for dimensionality reduction. Which of the
+following statements are correct regarding this method?
+□A. The method selects projection directions that maximize separation between class centroids.
+□B. The PCA step primarily reduces within-class variance by removing low-variance directions inside each
+class.
+□C. The method constructs a lower-dimensional discriminative subspace that preserves directions most
+relevant for class separability.
+□D. Rank-Reduced LDA can achieve higher classification accuracy than PCA even when PCA retains more
+variance.
+□E. The method selects directions that maximize overall variance.
+Solution 4.1
+A, C, D
+Question 4.2
+1 P.
+Your colleague suggests using standard PCA instead of LDA to differentiate the tissue types. Which of the
+following statements about PCA and LDA are correct in this context?
+□A. PCA is supervised and thus naturally identifies tissue categories.
+□B. LDA uses class labels (tissue types) to guide the transformation.
+□C. PCA maximizes class separability by default.
+□D. LDA maximizes between-class variance relative to within-class variance.
+□E. PCA guarantees optimal classification for your diagnostic tool.
+Solution 4.2
+B, D
+11
+
+
+===== PAGE 12 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+Question 4.3
+2 P.
+To handle the varying scales of different biopsy markers, you apply the LDA sphering transform:
+ϕ(x) = D−1/2U Tx
+This step is designed primarily to achieve which of the following?
+□A. Transform class-conditional covariance matrices so that all classes share the identity covariance matrix.
+□B. Remove correlations among features to simplify distance-based classification.
+□C. Maximize between-class scatter relative to within-class scatter.
+□D. Guarantee dimensionality reduction without losing discriminative information.
+□E. Ensure class means become orthogonal in transformed space.
+Solution 4.3
+A, B
+Question 4.4
+2 P.
+When choosing a distance metric to determine the final tissue diagnosis, which of the following geometric
+interpretations are correct?
+□A. The Mahalanobis distance can be interpreted as measuring Euclidean distance in a transformed space
+where feature correlations and unequal variances have been normalized.
+□B. Projecting data onto directions of maximum variance (PCA) always improves classification, because
+higher-variance directions contain more discriminative information.
+□C. If all class-conditional covariance matrices and class prior probabilities are identical, the Bayes-optimal
+Gaussian classifier reduces to a nearest-mean decision rule under the Mahalanobis distance.
+□D. If all class-conditional covariance matrices and class prior probabilities are identical, the Bayes-optimal
+Gaussian classifier reduces to a nearest-mean decision rule under the Euclidean distance.
+□E. High-variance directions selected by PCA can capture within-class variation instead of class separation,
+which may lead to greater overlap between classes after projection.
+Solution 4.4
+A, C, E
+Question 4.5
+2 P.
+Finally, you evaluate the full LDA model with a shared covariance Σ and the sphered transform ϕ(x). Which
+of the following technical details are correct for your final implementation?
+□A. After applying ϕ, all classes share the identity covariance matrix. In this space, the LDA decision rule
+with equal priors is equivalent to nearest-centroid classification using L1 distance.
+□B. The sphering transform ϕ inherently performs rank reduction from Rd to RK−1 because the between-
+class scatter matrix has rank at most K −1.
+12
+
+
+===== PAGE 13 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+□C. In rank-reduced LDA, the projection matrix Φ is obtained by solving a generalized eigenvalue problem
+and the resulting discriminant subspace has dimension at most K −1, regardless of the original feature
+dimension d.
+□D. After sphering the data, the LDA decision rule involves squared Euclidean distances and therefore
+yields quadratic decision boundaries in the transformed feature space.
+□E. The Fisher Transform viewpoint shows that maximizing the Rayleigh quotient J(r) = r⊤SBr
+r⊤SW r leads
+to the same linear boundaries as LDA. For the two-class case, the optimal direction satisfies r∗∝
+S −1
+W (µ1 −µ2).
+Solution 4.5
+C, E
+13
+
+
+===== PAGE 14 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+5 Optimization
+Question 5.1
+6 P.
+We consider the following convex optimization problem where we seek to find the point on a line closest to
+the origin (minimizing energy):
+minimize
+1
+2∥x∥2
+2 = 1
+2(x 2
+1 + x 2
+2 )
+subject to:
+x1 + x2 ≥4
+To solve this via duality, we systematically derive the Lagrange dual function g(λ) = infx L(x, λ).
+1. Step 1: Standard Form.
+Optimization literature typically defines the Lagrangian for inequality constraints in the form fi(x) ≤0.
+Which inequality represents the constraint f1(x) = x1 + x2 ≥4 in this standard form? (1 P.)
+□A. x1 + x2 −4 ≤0
+□B. 4 −x1 −x2 ≤0
+□C. x1 + x2 −4 = 0
+□D. −(x1 + x2) ≤−4
+□E. x1 ≥4 −x2
+2. Step 2: The Lagrangian.
+Based on the standard form f1(x) ≤0 identified above, what is the correct Lagrangian function L(x, λ)?
+(1 P.)
+□A. L(x, λ) = 1
+2(x 2
+1 + x 2
+2 ) −λ(x1 + x2 −4)
+□B. L(x, λ) = 1
+2(x 2
+1 + x 2
+2 ) + λ(4 −x1 −x2)
+□C. L(x, λ) = (x 2
+1 + x 2
+2 ) + λ(4 −x1 −x2)
+□D. L(x, λ) = 1
+2(x 2
+1 + x 2
+2 ) + λ(x1 + x2 −4)2
+□E. L(x, λ) = 1
+2(x 2
+1 + x 2
+2 ) + P2
+i=1 λi(4 −xi)
+3. Step 3: Minimization w.r.t Primal Variables.
+To calculate the dual function g(λ) = infx L(x, λ), we minimize L with respect to x by setting the
+gradient ∇xL to zero. What is the resulting relationship between x and λ? (2 P.)
+□A. x1 = 0, x2 = 0
+□B. x1 = −λ, x2 = −λ
+□C. x1 = λ, x2 = λ
+□D. x1 = 4 −x2
+□E. ∇xL = 2x −λ = 0 =⇒x = λ/2
+4. Step 4: The Dual Function.
+By substituting the optimal x expressions back into the Lagrangian, we obtain the dual function g(λ).
+Which of the following is the correct expression? (2 P.)
+□A. g(λ) = λ2 −4λ
+□B. g(λ) = 4λ −λ2
+14
+
+
+===== PAGE 15 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+□C. g(λ) = 4λ −2λ2
+□D. g(λ) = 2λ2 + 4
+□E. g(λ) = −1
+2λ2 + 4λ
+Solution 5.1
+1. B: The standard form requires fi(x) ≤0. Rearranging x1 + x2 ≥4 yields 4 −x1 −x2 ≤0.
+2. B: The Lagrangian is defined as L(x, λ) = f0(x) + P λifi(x). Using the result from Step 1, this is
+1
+2∥x∥2 + λ(4 −x1 −x2).
+3. C: Taking the partial derivatives:
+∂L
+∂x1 = x1 −λ = 0 ⇒x1 = λ. Similarly, x2 = λ.
+4. B: Substituting x1 = λ, x2 = λ back into L:
+g(λ) = 1
+2(λ2 + λ2) + λ(4 −λ −λ) = λ2 + 4λ −2λ2 = 4λ −λ2
+This process is analogous to the derivation of the SVM dual.
+15
+
+
+===== PAGE 16 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+6 Expectation Maximization
+You are a geophysicist analyzing a large dataset of seismic vibrations. Because the different geological sources
+of these vibrations are not explicitly labeled, you utilize a Gaussian Mixture Model (GMM) to perform
+density estimation and discover latent patterns in the activity. You apply the Expectation-Maximization
+(EM) algorithm to refine your model parameters. (8 P.)
+Question 6.1
+1 P.
+As you structure the latent variables for your seismic model, you evaluate how the model handles unobserved
+assignments. Which of the following statements are incorrect? (Select all that apply.)
+□A. The Observed-data log likelihood is guaranteed to increase whenever the responsibilities are updated.
+□B. If the latent variables Z (the specific seismic source) were observed, maximum likelihood estimation
+would reduce to fitting independent Gaussian distributions to disjoint subsets of the data.
+□C. The Observed-data log likelihood is Convex in the mixture parameters, since it is obtained by
+marginalizing over the latent variables.
+□D. Knowing the values of the latent variables removes the need for the EM algorithm, because the
+resulting maximum likelihood problem admits a closed-form solution.
+□E. When component assignments are treated as known, the log-likelihood separates into independent
+terms for each component, whereas when assignments are unknown, the log-likelihood involves a log of
+a sum over components.
+Solution 6.1
+A, C
+Question 6.2
+1 P.
+To quantify the probability that a specific tremor belongs to ”Volcanic Activity” versus ”Tectonic Shift,” you
+calculate the responsibilities γ(znk). Which of the following statements are correct? (Select all that apply.)
+□A. Responsibilities are posterior probabilities of latent variables.
+□B. Responsibilities sum to one over mixture components for each data point.
+□C. Responsibilities correspond to hard cluster assignments (each tremor is assigned to exactly one source).
+□D. Responsibilities depend on current parameter estimates (πk, µk, Σk).
+□E. Responsibilities are optimized in the M-step of the algorithm.
+Solution 6.2
+A, B, D
+16
+
+
+===== PAGE 17 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+Question 6.3
+2 P.
+While training your seismic model, you monitor the convergence of the EM algorithm. Which of the following
+statements are true about the algorithm’s behavior? (Select all that apply.)
+□A. The choice of initial values for the seismic component parameters (e.g., initial mean vibration frequency)
+affects the final estimates.
+□B. The EM algorithm is guaranteed to converge.
+□C. The EM algorithm is guaranteed to converge to the global maximum of the likelihood.
+□D. The parameter estimates obtained at convergence are guaranteed to be the global Maximum Likelihood
+Estimates.
+Solution 6.3
+A, B
+Question 6.4
+2 P.
+You consider incorporating historical geological data as a prior distribution p(θ) using Maximum A Posteriori
+(MAP) estimation. Which of the following statements regarding MLE and MAP are correct?
+□A. The MLE depends only on the likelihood function, whereas the MAP estimator additionally depends
+on the prior distribution p(θ).
+□B. If your prior for seismic activity is uniform, the MAP estimator becomes identical to the MLE.
+□C. MAP estimation can be formulated as maximizing the sum of the log-likelihood and the log-prior.
+□D. Because the MAP estimator utilizes prior geological knowledge, it is mathematically guaranteed to
+always provide a better estimate of the true parameters than MLE.
+□E. For a massive dataset of seismic records, the influence of the prior on the MAP estimator necessarily
+disappears, regardless of the choice of prior.
+Solution 6.4
+A, B, C
+Question 6.5
+2 P.
+Your model occasionally produces errors where a component ”collapses.” Which of the following technical
+statements are correct regarding the refinement of your GMM? Select all that apply.
+□A. The EM algorithm directly optimizes seismic classification accuracy during the training process.
+□B. During the EM algorithm, the expected complete-data log-likelihood is maximized with respect to the
+model parameters while keeping the responsibilities fixed.
+□C. A fixed point of the EM algorithm may correspond to a saddle point of the observed-data log-likelihood
+rather than a strict local maximum.
+□D. The EM algorithm can converge to degenerate solutions in which a component collapses onto a single
+seismic event with a vanishing covariance matrix.
+17
+
+
+===== PAGE 18 =====
+Pattern Recognition
+Mock Exam
+Prof. Dr.-Ing. Andreas Maier
+March 20, 2026
+Pattern
+Recognition
+Lab
+□E. A GMM trained via EM performs density estimation; identifying a specific tremor’s source requires an
+additional decision rule based on posterior probabilities.
+Solution 6.5
+B, C, D, E
+18
+
+
